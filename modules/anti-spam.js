@@ -102,6 +102,7 @@ module.exports = function (client) {
         const user = msg.channel.guild.members.find(member => member.user.id === msg.author.id);
         if (!user) return;
         // will be replace with mute.
+        /*
         user.ban().then(() => {
             msg.channel.send(msg.author + ' ' + banMessage).then((mes) => mes.delete(5000));
             return true;
@@ -109,7 +110,8 @@ module.exports = function (client) {
             msg.channel.send('insufficient permission to kick ' + msg.author + ' for spamming.').then((mes) => mes.delete(5000));
             return false;
         });
-
+        */
+        msg.channel.send(`you would have been banned. ${msg.member}`);
     }
 
 };
