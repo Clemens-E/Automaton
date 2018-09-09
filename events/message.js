@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const $console = require('Console');
 const invite_del = require('./../modules/invite_delete.js');
+const highlight = require('./../modules/highlight.js');
 module.exports = async (client, message) => {
     if (message.channel.type == 'dm') return;
     if (message.author.bot) return;
@@ -27,6 +28,10 @@ module.exports = async (client, message) => {
             bye_m: '',
             // If a User is listed on dbans, he gets automatically banned
             ban_reported_user: true,
+            // Send Highligh reports
+            highlight: false,
+            // What Strings should be highlighted
+            highlight_it: [],
         };
         $console.log('created settings for ' + message.guild.name + ' | ID: ' + message.guild.id);
         client.settings.set(message.guild.id, settingstmp);
@@ -53,7 +58,7 @@ module.exports = async (client, message) => {
 
     // If invite delete is active (known as "invite_del") run the code for that
     if (client.settings.getProp(message.guild.id, 'invite_del')) invite_del.run(client, message);
-
+    if (client.settings.getProp(message.guild.id, 'highlight')) highlight.run(client, message);
     const prefix = client.settings.getProp(message.guild.id, 'prefix');
     if (message.content.startsWith(`<@${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
         message.channel.send(new Discord.RichEmbed()

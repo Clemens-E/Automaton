@@ -14,11 +14,7 @@ module.exports = async (client, reaction, user, index) => {
     if (role < 0) return;
     role = (guild.roles.has(role)) ? guild.roles.get(role) : undefined;
 
-
-    let logchannel = client.channels.get(client.settings.get(guild.id, 'log_channel'));
-
-    // If we don't have permissions to send messages, we will make it undefined.
-    if (logchannel && !logchannel.permissionsFor(guild.me).has('SEND_MESSAGES')) logchannel = undefined;
+    const logchannel = client.logchannel(guild.id);
 
     // If the role doesnt exist send a message if possible and return
     if (!role && !logchannel) return;
