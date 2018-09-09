@@ -15,7 +15,7 @@ module.exports = async (client) => {
             ramovermax = true;
             $console.warn(`This process uses more than ${max}MB RAM!`);
             $console.stress(`RAM Usage: ${usage}MB`);
-            heapdump.writeSnapshot(`./heapdump/${Date.now()}.heapsnapshot`, function (err, filename) {
+            heapdump.writeSnapshot(`./${Date.now()}.heapsnapshot`, function (err, filename) {
                 $console.success('dump written to', filename);
             });
             client.channels.get('461211772804792320').send(new Discord.RichEmbed()
@@ -41,19 +41,21 @@ module.exports = async (client) => {
         let times = client.settings.getProp('mutes', 'users_tempmute');
         const userinfo = client.settings.getProp('mutes', 'users_muted_ids');
         for (let i = 0; i < times * 3; i += 3) {
-            if (parseInt(userinfo[i + 1]) > parseInt((new Date()).getTime())) continue;
-            if (!client.guilds.has(userinfo[i + 2])) continue;
-            const guild2f = client.guilds.get(userinfo[i + 2]);
-            if (!guild2f.me.permissions.has('MANAGE_ROLES')) continue;
-            const futoMute = guild2f.member(userinfo[i]);
-            const fumuterole = guild2f.roles.find(r => r.name === 'muted by Automaton');
-            if (fumuterole && futoMute.roles.has(fumuterole.id)) {
-                await futoMute.removeRole(fumuterole);
+            const guild = client.guilds.get(userinfo[i + 2]);
+            if (!guild || !guild.me.permissions.has('MANAGE_ROLES')) continue;
+            const member = guild.member(userinfo[i]);
+            const muteRole = guild.roles.find(r => r.name === 'muted by Automaton');
+            if (!muteRole) continue;
+            if (parseInt(userinfo[i + 1]) > Date.now()) {
+                if (!member.roles.has(muteRole.id)) await member.addRole(muteRole);
             }
-            userinfo.splice(i, 3);
-            times -= 1;
-            client.settings.setProp('mutes', 'users_muted_ids', userinfo);
-            client.settings.setProp('mutes', 'users_tempmute', times);
+            else {
+                if (member.roles.has(muteRole.id)) await member.removeRole(muteRole);
+                userinfo.splice(i, 3);
+                times -= 1;
+                client.settings.setProp('mutes', 'users_muted_ids', userinfo);
+                client.settings.setProp('mutes', 'users_tempmute', times);
+            }
         }
-    }, 10000);
+    }, 3000);
 };

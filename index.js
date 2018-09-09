@@ -24,7 +24,7 @@ client.reactsave = new Enmap({
 process.on('unhandledRejection', error => {
     $console.error(`Uncaught Promise Error: \n${error.stack}`);
 });
-// antispam(client);
+antispam(client);
 // Its the well loved Soon™
 fs.readdir('./events/', (err, files) => {
     let eventssize = 0;

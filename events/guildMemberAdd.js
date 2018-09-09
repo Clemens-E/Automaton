@@ -17,7 +17,6 @@ module.exports = async (client, member) => {
         }
         wmsg = wmsg.replace('{user}', member.toString());
         wmsg = wmsg.replace('{guild}', member.guild.name);
-        greetchannel = client.channels.get(greetchannel);
         greetchannel.send(wmsg);
     }
     // Search for the user in DBANS

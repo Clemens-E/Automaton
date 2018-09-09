@@ -1,81 +1,81 @@
 const authors = [];
-const warned = [];
 const banned = [];
-const messagelog = [];
+const warned = [];
+let messagelog = [];
 
-/**
- * Add simple spam protection to your discord server.
- * @param  {client} client - The discord.js CLient/client
- * @param  {object} options - Optional (Custom configuarion options)
- * @return {[type]}         [description]
- */
+setInterval(() => {
+    messagelog = [];
+}, 300000);
+
 module.exports = function (client) {
-    const warningMessage = 'stop spamming or I\'ll whack your head off.';
-    const banMessage = 'has been banned for spamming, anyone else?';
+    const warningMessage = 'You are writing fast or you send the exact same message every time. Please slow down.';
+    const banMessage = 'has been muted for spamming.';
     const set = (enmap, search, norm) => (enmap.hasOwnProperty(search)) ? enmap[search] : norm;
 
     client.on('message', msg => {
         if (msg.author.bot) return;
         if (msg.attachments.size > 0) return;
         if (!client.settings.has(msg.guild.id)) return;
+        console.log(banned);
+        console.log(warned);
+        console.log(messagelog);
+        console.log(authors);
 
         const map = client.settings.get(msg.guild.id);
 
+        // If there aren't any specific settings just take the default.
         const warnBuffer = set(map, 'warnBuffer', 5);
-        const maxBuffer = set(map, 'maxBuffer', 5);
-        const interval = set(map, 'interval', 5);
+        const maxBuffer = set(map, 'maxBuffer', 7);
+        const interval = set(map, 'interval', 5000);
         const maxDuplicatesWarning = set(map, 'maxDuplicatesWarning', 5);
-        const maxDuplicatesBan = set(map, 'maxDuplicatesBan', 5);
+        const maxDuplicatesBan = set(map, 'maxDuplicatesBan', 7);
 
 
-        if (msg.author.id != client.user.id) {
-            const now = Math.floor(Date.now());
-            authors.push({
-                'time': now,
-                'author': msg.author.id,
-            });
-            messagelog.push({
-                'message': msg.content,
-                'author': msg.author.id,
-            });
+        const now = Math.floor(Date.now());
+        authors.push({
+            'time': now,
+            'author': msg.author.id,
+        });
+        messagelog.push({
+            'message': msg.content,
+            'author': msg.author.id,
+        });
 
-            // Check how many times the same message has been sent.
-            let msgMatch = 0;
-            for (let i = 0; i < messagelog.length; i++) {
-                if (messagelog[i].message == msg.content && (messagelog[i].author == msg.author.id) && (msg.author.id !== client.user.id)) {
-                    msgMatch++;
+        // To not fill the ram we cut it down when it gets too big.
+        if (messagelog.length > 500) {
+            messagelog.shift();
+        }
+
+        // Check how many times the same message has been sent.
+        let msgMatch = 0;
+        for (let i = 0; i < messagelog.length; i++) {
+            if (messagelog[i].message === msg.content && (messagelog[i].author === msg.author.id)) {
+                msgMatch++;
+            }
+        }
+        // Check matched count
+        if (msgMatch === maxDuplicatesWarning && !warned.includes(msg.author.id)) {
+            warn(msg);
+        }
+        if (msgMatch === maxDuplicatesBan && !banned.includes(msg.author.id)) {
+            ban(msg);
+        }
+
+        let matched = 0;
+        for (let i = 0; i < authors.length; i++) {
+            if (authors[i].time > now - interval) {
+                matched++;
+                if (matched === warnBuffer && !warned.includes(msg.author.id)) {
+                    warn(msg);
+                }
+                if (matched === maxBuffer && !banned.includes(msg.author.id)) {
+                    ban(msg);
                 }
             }
-            // Check matched count
-            if (msgMatch == maxDuplicatesWarning && !warned.includes(msg.author.id)) {
-                warn(msg, msg.author.id);
-            }
-            if (msgMatch == maxDuplicatesBan && !banned.includes(msg.author.id)) {
-                ban(msg, msg.author.id);
-            }
-
-            let matched = 0;
-
-            for (let i = 0; i < authors.length; i++) {
-                if (authors[i].time > now - interval) {
-                    matched++;
-                    if (matched == warnBuffer && !warned.includes(msg.author.id)) {
-                        warn(msg, msg.author.id);
-                    }
-                    else if (matched == maxBuffer) {
-                        if (!banned.includes(msg.author.id)) {
-                            ban(msg, msg.author.id);
-                        }
-                    }
-                }
-                else if (authors[i].time < now - interval) {
-                    authors.splice(i);
-                    warned.splice(warned.indexOf(authors[i]));
-                    banned.splice(warned.indexOf(authors[i]));
-                }
-                if (messagelog.length >= 200) {
-                    messagelog.shift();
-                }
+            else if (authors[i].time < now - interval) {
+                authors.splice(i);
+                warned.splice(warned.indexOf(authors[i]));
+                banned.splice(warned.indexOf(authors[i]));
             }
         }
     });
@@ -83,20 +83,18 @@ module.exports = function (client) {
     /**
      * Warn a user
      * @param  {Object} msg
-     * @param  {string} userid userid
      */
-    function warn(msg, userid) {
+    function warn(msg) {
         warned.push(msg.author.id);
-        msg.channel.send(msg.author + ' ' + warningMessage);
+        msg.channel.send(msg.author + ' ' + warningMessage).then((mes) => mes.delete(5000));
     }
 
     /**
      * Ban a user by the user id
      * @param  {Object} msg
-     * @param  {string} userid userid
      * @return {boolean} True or False
      */
-    function ban(msg, userid) {
+    function ban(msg) {
         for (let i = 0; i < messagelog.length; i++) {
             if (messagelog[i].author == msg.author.id) {
                 messagelog.splice(i);
@@ -106,15 +104,16 @@ module.exports = function (client) {
         banned.push(msg.author.id);
 
         const user = msg.channel.guild.members.find(member => member.user.id === msg.author.id);
-        if (user) {
-            user.ban().then((member) => {
-                msg.channel.send(msg.author + ' ' + banMessage);
-                return true;
-            }).catch(() => {
-                msg.channel.send('insufficient permission to kick ' + msg.author + ' for spamming.');
-                return false;
-            });
-        }
+        if (!user) return;
+        // will be replace with mute.
+        user.ban().then(() => {
+            msg.channel.send(msg.author + ' ' + banMessage).then((mes) => mes.delete(5000));
+            return true;
+        }).catch(() => {
+            msg.channel.send('insufficient permission to kick ' + msg.author + ' for spamming.').then((mes) => mes.delete(5000));
+            return false;
+        });
+
     }
 
 };

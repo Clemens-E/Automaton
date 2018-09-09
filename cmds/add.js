@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${message.channel}. Please make sure I can and try again.`);
+    if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');

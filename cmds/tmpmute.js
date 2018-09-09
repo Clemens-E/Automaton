@@ -34,6 +34,8 @@ module.exports.run = async (client, message, args) => {
             permissions: [],
         });
     }
+    if (!message.guild.me.permissions.has('MANAGE_CHANNELS')) return message.channel.send('I need the permission `Manage Channels`');
+
     message.guild.channels.map(async channel => {
         await channel.overwritePermissions(fmuterole, {
             SEND_MESSAGES: false,
