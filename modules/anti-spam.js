@@ -16,19 +16,15 @@ module.exports = function (client) {
         if (msg.author.bot) return;
         if (msg.attachments.size > 0) return;
         if (!client.settings.has(msg.guild.id)) return;
-        console.log(banned);
-        console.log(warned);
-        console.log(messagelog);
-        console.log(authors);
 
         const map = client.settings.get(msg.guild.id);
 
         // If there aren't any specific settings just take the default.
         const warnBuffer = set(map, 'warnBuffer', 5);
-        const maxBuffer = set(map, 'maxBuffer', 7);
+        const maxBuffer = set(map, 'maxBuffer', 8);
         const interval = set(map, 'interval', 5000);
         const maxDuplicatesWarning = set(map, 'maxDuplicatesWarning', 5);
-        const maxDuplicatesBan = set(map, 'maxDuplicatesBan', 7);
+        const maxDuplicatesBan = set(map, 'maxDuplicatesBan', 8);
 
 
         const now = Math.floor(Date.now());
