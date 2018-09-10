@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args) => {
             return channel.send('Time went out or the command was cancelled. No Sentence added');
         }
         if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
-        client.reactsave.pushIn(guild.id, 'highlight_it', add_highlight);
+        client.settings.pushIn(guild.id, 'highlight_it', add_highlight);
         channel.send(`added the string\`\`\`${add_highlight}\`\`\` to highlight. You will recieve a message in your log channel.`);
     });
 
