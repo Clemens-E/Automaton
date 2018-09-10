@@ -22,7 +22,7 @@ module.exports.run = async (client, message) => {
     });
     rcollector.on('collect', async (r) => {
         message.delete().then(() =>
-            msg.edit(embed.setFooter(`Message deleted by ${r.users.last().tag}`))
+            msg.edit(embed.setFooter(`Message deleted by ${r.users.last().tag} (ID: ${r.users.last().id})`))
         ).catch(() =>
             msg.edit(embed.setFooter('No Permission to delete that message'))
         );
