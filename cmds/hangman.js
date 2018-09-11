@@ -2,7 +2,7 @@ const $console = require('Console');
 const Discord = require('discord.js');
 const randomWords = require('random-words');
 const hangman = require('hangman-game-engine');
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
     const func = () => {
         setTimeout(() => {
             if (!messages[count - 1] || messages[count - 1].createdTimestamp < Date.now() - 60000) {
@@ -48,7 +48,7 @@ module.exports.run = async (client, message, args) => {
 
     });
 
-    mcollector.on('end', async (m) => {
+    mcollector.on('end', () => {
         if (game.status === 'IN_PROGRESS') {
             if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
             return channel.send('No answer passed or command was cancelled. Mission abort!');
