@@ -1,6 +1,5 @@
 const $console = require('Console');
-const Discord = require('discord.js');
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
     const guild = message.guild;
     const channel = message.channel;
     if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
@@ -30,7 +29,7 @@ module.exports.run = async (client, message, args) => {
         mcollector.stop();
     });
 
-    mcollector.on('end', async (m) => {
+    mcollector.on('end', async () => {
         if (!add_highlight) {
             if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
             return channel.send('Time went out or the command was cancelled. No Sentence added');
