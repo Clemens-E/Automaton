@@ -6,8 +6,7 @@ module.exports = async (client, member) => {
     // Get both channels. If no permissions make it undefined
     let greetchannel = client.settings.getProp(member.guild.id, 'greet_channel');
     greetchannel = (client.channels.has(greetchannel) && client.channels.get(greetchannel).permissionsFor(member.guild.me).has('SEND_MESSAGES')) ? client.channels.get(greetchannel) : undefined;
-    let logchannel = client.settings.getProp(member.guild.id, 'log_channel');
-    logchannel = (client.channels.has(logchannel) && client.channels.get(logchannel).permissionsFor(member.guild.me).has('SEND_MESSAGES')) ? client.channels.get(logchannel) : undefined;
+    const  logchannel = client.logchannel(member.guild.id);
 
     if (greetchannel && greet) {
         let wmsg = client.settings.getProp(member.guild.id, 'welcome_m');
