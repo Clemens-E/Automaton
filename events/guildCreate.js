@@ -22,13 +22,14 @@ module.exports = async (client, guild) => {
         .addField('Humans', guild.memberCount - guild.members.filter(m => m.user.bot).size, true)
         .addField('Bots', guild.members.filter(m => m.user.bot).size, true)
         .addField('Guilds in total', `${client.guilds.size}`)).catch((O_o) => O_o);
-    const possiblechannels = guild.channels.filter((c) => c.permissionsFor(guild.me).has('SEND_MESSAGES'));
+    const possiblechannels = guild.channels.filter((c) => c.permissionsFor(guild.me).has('SEND_MESSAGES') && c.type === 'text');
     if (possiblechannels.size === 0) return;
+    possiblechannels.sort((c1, c2) => c1.position - c2.position);
     possiblechannels.last().send(new Discord.RichEmbed()
         .setColor(3127860)
         .addField('*Hello! Iam Automaton*', 'Thanks for adding me to your server!')
         .addField('Find help:', '[Full Documentation](https://automaton.gitbook.io/automaton/ "Official Docs")', true)
-        .addField('My default prefix is `>`. If you ever forget it,\njust ping me in the beginning of the message and I will tell you!')
-        .setFooter(`this is the ${client.guilds.size} guild I joined.`));
+        .addField('Prefix', 'My default prefix is `>`. If you ever forget it,\njust ping me in the beginning of the message and I will tell you!')
+        .setFooter(`This is the ${client.guilds.size} Guild I joined.`));
 
 };
