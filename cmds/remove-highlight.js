@@ -1,5 +1,4 @@
 const $console = require('Console');
-const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
@@ -31,7 +30,7 @@ module.exports.run = async (client, message, args) => {
         mcollector.stop();
     });
 
-    mcollector.on('end', async (m) => {
+    mcollector.on('end', async () => {
         if (!rmHighlight) {
             if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
             return channel.send('Time went out or the command was cancelled. Nothing removed');
