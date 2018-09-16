@@ -1,5 +1,5 @@
 const $console = require('Console');
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
     const guild = message.guild;
     const channel = message.channel;
     if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
