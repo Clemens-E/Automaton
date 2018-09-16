@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message) => {
-    if ((!message.member.permissions.has('MANAGE_GUILD') || !message.member.permissions.has('MANAGE_ROLES')) && message.author.id !== client.config.ownerid) { return message.channel.send('You dont have enough permissions on that server\nYou need the permission `Manage Guild` and `Manage Roles`'); }
+    if ((!message.member.permissions.has('MANAGE_GUILD')) && message.author.id !== client.config.ownerid) { return message.channel.send('You dont have enough permissions on that server\nYou need the permission `Manage Guild`'); }
     if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(':x:\nI cant send messages in that channel!\nPlease make sure I can and then try again');
     if (!client.settings.has(message.guild.id)) return message.author.send('I cant find any data from your server\nPlease join the support server or kick & add me again');
 
