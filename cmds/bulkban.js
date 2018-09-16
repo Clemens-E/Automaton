@@ -6,11 +6,13 @@ module.exports.run = async (client, message, args) => {
     const embed = new Discord.RichEmbed().setColor(client.config.cs).setTitle('Bulk Ban result');
     const guild = message.guild;
     let banned = '';
-    Promise.all(args.map(u => guild.ban(u).then((r) => {
-        banned += `banned ${r.username}#${r.discriminator} (ID: ${r.id})\n`;
-    }).catch((r) => {
-        banned += `error while banning ID ${r}\n`;
-    }))).then(() => {
+    Promise.all(args.map(u => {
+        guild.ban(u).then((r) => {
+            banned += `banned ${r.username}#${r.discriminator} (ID: ${r.id})\n`;
+        }).catch((r) => {
+            banned += `error while banning ID ${r}\n`;
+        });
+    })).then(() => {
         message.channel.send(embed.setDescription(banned));
     });
 };
