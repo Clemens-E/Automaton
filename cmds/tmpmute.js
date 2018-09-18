@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
     array.push(guildid);
     client.settings.setProp('mutes', 'users_muted_ids', array);
     client.settings.setProp('mutes', 'users_tempmute', times + 1);
-    let fmuterole = message.guild.roles.find(r => r.name === 'muted by Automanton');
+    let fmuterole = message.guild.roles.find(r => r.name === 'muted by Automaton');
     if (!fmuterole) {
         fmuterole = await message.guild.createRole({
             name: 'muted by Automaton',
