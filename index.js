@@ -6,7 +6,6 @@ const config = require('./config.json');
 const Enmap = require('enmap');
 const antispam = require('./modules/anti-spam.js');
 const Lookup = require('./modules/lookup.js').Lookup;
-
 $console.success(`Process started at ${new Date(Date.now())}`);
 client.config = config;
 client.dbans = new Lookup(client.config.dbanstoken);
@@ -25,7 +24,6 @@ process.on('unhandledRejection', error => {
     $console.error(`Uncaught Promise Error: \n${error.stack}`);
 });
 antispam(client);
-// Its the well loved Soon™
 fs.readdir('./events/', (err, files) => {
     let eventssize = 0;
     if (err) return $console.error(err);
