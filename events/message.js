@@ -60,7 +60,8 @@ module.exports = async (client, message) => {
     if (client.settings.getProp(message.guild.id, 'invite_del')) invite_del.run(client, message);
     if (client.settings.getProp(message.guild.id, 'highlight')) highlight.run(client, message);
     const prefix = client.settings.getProp(message.guild.id, 'prefix');
-    if (message.content.startsWith(`<@${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)) {
+    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>)`);
+    if (prefixRegex.test(message.content)) {
         message.channel.send(new Discord.RichEmbed()
             .setColor(client.config.cn)
             .addField('Info', `Prefix on this Server: \`${prefix}\`\nDo \`${prefix}help\` for more information`));
