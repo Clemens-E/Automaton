@@ -4,9 +4,9 @@ module.exports.run = async (client, message, args) => {
     if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('You don\'t have enough permissions to kick members');
     if (!message.guild.me.permissions.has('KICK_MEMBERS')) return message.channel.send('I don\'t have enough permissions to kick members');
     if (!member) return message.channel.send('Please mention the member you want to kick');
-    if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The member you mentioned has the same or higher position than you.');
+    if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds yours.');
     if (!member.kickable) return message.channel.send('I can\'t kick that member');
-    if (member.highestRole.position > message.guild.me.highestRole.position) return message.channel.send('The member you mentioned has the same or higher position than me');
+    if (member.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds mine.');
     args[0] = '';
     const reason = args.join(' ');
     await member.kick(reason);
