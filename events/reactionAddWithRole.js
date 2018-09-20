@@ -28,7 +28,7 @@ module.exports = async (client, reaction, user, index) => {
     else if (!guild.me.permissions.has('MANAGE_ROLES')) return;
 
     // If the role has more permissions than the bot we will get a promise rejection when we try to add the role
-    if (role.comparePositionTo(guild.me.highestRole) >= 0 && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried assigning role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nthe role to assing has the same or higher position than me`));
+    if (role.comparePositionTo(guild.me.highestRole) >= 0 && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried assigning role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nThe roles position equals or exceeds mine.`));
     else if (role.comparePositionTo(guild.me.highestRole) >= 0) return;
     let success = true;
     await member.addRole(role.id).catch(err => {
