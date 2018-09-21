@@ -10,8 +10,8 @@ module.exports.run = async (client, message) => {
 
     // Get the last 3 messages in that channel.
     const lastMessages = message.channel.messages.array().slice(-3).filter((m) => !m.author.bot);
-    const output = lastMessages.map((m) => `${m.author.tag}: ${(m.content.length > 200) ? m.content.splice(-200) : m.content}`);
-    const embed = new Discord.RichEmbed().setColor(client.config.ci).setDescription(`${message.member} wrote a highlighted Word in ${message.channel}\nChat History:\n\`\`\`${output.join('\n')}\`\`\``);
+    const output = lastMessages.map((m) => `${m.author.tag}: ${(m.content.length > 100) ? `${m.content.substring(0, 100)}...` : m.content}`);
+    const embed = new Discord.RichEmbed().setColor(client.config.ci).setDescription(`${message.member} wrote a highlighted Word in ${message.channel}\nChat History:\n\`\`\`fix\n${output.join('\n')}\`\`\``);
     const msg = await logchannel.send(embed.setFooter('React with 🗑 to delete the message (10 Minutes Time)'));
     await msg.react('🗑');
     const filter = (r, u) =>
