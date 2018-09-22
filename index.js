@@ -9,15 +9,10 @@ const Lookup = require('./modules/lookup.js').Lookup;
 $console.success(`Process started at ${new Date(Date.now())}`);
 client.config = config;
 client.dbans = new Lookup(client.config.dbanstoken);
-client.settings = new Enmap({
-    name: 'settings',
-});
+Object.assign(client, Enmap.multi(['settings', 'reactsave']));
 client.userp = new Enmap({
     name: 'userpoints',
     fetchAll: false,
-});
-client.reactsave = new Enmap({
-    name: 'reactsave',
 });
 
 process.on('unhandledRejection', error => {
