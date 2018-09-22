@@ -9,7 +9,7 @@ const Lookup = require('./modules/lookup.js').Lookup;
 $console.success(`Process started at ${new Date(Date.now())}`);
 client.config = config;
 client.dbans = new Lookup(client.config.dbanstoken);
-Object.assign(client, Enmap.multi(['settings', 'reactsave']));
+Object.assign(client, Enmap.multi(['settings', 'reactsave', 'premium']));
 client.userp = new Enmap({
     name: 'userpoints',
     fetchAll: false,
