@@ -14,7 +14,7 @@ module.exports = async (client, reaction, user, index) => {
     if (role < 0) return;
     role = (guild.roles.has(role)) ? guild.roles.get(role) : undefined;
 
-    const logchannel = client.logchannel(guild.id);
+    const logchannel = client.getLogchannel(guild.id);
 
     // If the role doesnt exist send a message if possible and return
     if (!role && !logchannel) return;
