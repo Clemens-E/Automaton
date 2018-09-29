@@ -45,11 +45,19 @@ fs.readdir('./cmds/', (err, files) => {
     $console.success(`loaded ${cmds} commands`);
 });
 
-client.logchannel = (guildid) => {
+client.getLogchannel = (guildid) => {
     if (typeof guildid !== 'string') throw 'channel must be a string.';
     const logchannel = client.channels.get(client.settings.getProp(guildid, 'log_channel'));
     if (logchannel && !logchannel.permissionsFor(client.user).has('SEND_MESSAGES')) return undefined;
     return logchannel;
+};
+
+Object.size = function (obj) {
+    let size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
 };
 
 client.login(config.token);
