@@ -22,3 +22,10 @@ module.exports.run = async (client, message, args) => {
         .setColor(3127860)
         .addField('User banned', `${message.author} banned ${member.user.tag} for \`${reason}\``));
 };
+
+exports.help = {
+    name: 'ban',
+    category: 'moderation',
+    example: 'ban @User <reason>',
+    description: 'bans the User. Duhhh',
+};

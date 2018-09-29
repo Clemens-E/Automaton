@@ -12,3 +12,10 @@ module.exports.run = async (client, message) => {
     client.settings.setProp(message.guild.id, 'premium', true);
     message.channel.send(`The guild \`${message.guild.name}\` is now Premium`);
 };
+
+exports.help = {
+    name: 'get-premium',
+    category: 'premium',
+    example: 'get-premium',
+    description: 'makes the current Guild premium. Only works with Users listed in the Premium Database',
+};

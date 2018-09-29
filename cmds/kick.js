@@ -22,3 +22,10 @@ module.exports.run = async (client, message, args) => {
         .setColor(3127860)
         .addField('User kicked', `${message.author} kicked ${member.user.tag} for \`${reason}\``));
 };
+
+exports.help = {
+    name: 'kick',
+    category: 'moderation',
+    example: 'kick @User',
+    description: 'Kicks the mentioned User. Duhhh',
+};

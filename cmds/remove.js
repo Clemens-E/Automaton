@@ -95,3 +95,10 @@ module.exports.run = async (client, message, args) => {
     });
 
 };
+
+exports.help = {
+    name: 'remove',
+    category: 'reaction role',
+    example: 'remove',
+    description: 'Removing a role and a emoji from a template',
+};

@@ -60,3 +60,10 @@ module.exports.run = async (client, message) => {
     });
 
 };
+
+exports.help = {
+    name: 'hangman',
+    category: 'entertainment',
+    example: 'hangman',
+    description: 'lets you play the classic hangman game',
+};

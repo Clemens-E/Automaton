@@ -19,3 +19,10 @@ module.exports.run = async (client, message, args) => {
     if (!msgfound) return channel.send('I can\'t find that message id in my database.');
     channel.send('I found the message ID. I removed it, and new reactions won\'t get a role.');
 };
+
+exports.help = {
+    name: 'deletemsg',
+    category: 'reaction role',
+    example: 'deletemsg 492807630528577546',
+    description: 'deletes a message ID from reaction role. active IDs can be seen in the command `settings reaction`',
+};

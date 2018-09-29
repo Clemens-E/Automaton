@@ -16,3 +16,10 @@ module.exports.run = async (client, message, args) => {
             break;
     }
 };
+
+exports.help = {
+    name: 'reset',
+    category: 'settings',
+    example: 'reset',
+    description: 'deleting a database for this Guild',
+};

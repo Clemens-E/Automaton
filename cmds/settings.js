@@ -37,3 +37,10 @@ Ban Reported Users: ${(data.ban_reported_user) ? 'Yes' : 'No'}
     channel.send(embed);
 
 };
+
+exports.help = {
+    name: 'settings',
+    category: 'settings',
+    example: 'settings',
+    description: 'Shows the current settings of the Guild',
+};

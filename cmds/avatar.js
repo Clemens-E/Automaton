@@ -13,3 +13,10 @@ module.exports.run = async (client, message, args) => {
         embed,
     });
 };
+
+exports.help = {
+    name: 'avatar',
+    category: 'others',
+    example: 'avatar Auto',
+    description: 'Showing the avatar of the mentioned user or seaches him by name',
+};

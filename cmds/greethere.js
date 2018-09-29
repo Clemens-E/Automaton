@@ -23,3 +23,10 @@ module.exports.run = async (client, message) => {
         .setDescription(`Your new greet channel is <#${message.channel.id}>`));
 
 };
+
+exports.help = {
+    name: 'greethere',
+    category: 'settings',
+    example: 'greethere',
+    description: 'sets the current channel as welcome message channel',
+};

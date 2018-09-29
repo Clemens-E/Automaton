@@ -11,3 +11,10 @@ module.exports.run = async (client, message) => {
         .addField(`current points: ${points}`, '** **')
         .addField('**-------------------**', '** **'));
 };
+
+exports.help = {
+    name: 'balance',
+    category: 'entertainment',
+    example: 'balance',
+    description: 'Shows your current balance',
+};

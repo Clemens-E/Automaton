@@ -87,3 +87,10 @@ module.exports.run = async (client, message, args) => {
     });
 
 };
+
+exports.help = {
+    name: 'add',
+    category: 'reaction role',
+    example: 'add',
+    description: 'Adding a role and a emoji to a template',
+};

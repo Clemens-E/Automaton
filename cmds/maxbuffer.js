@@ -4,3 +4,10 @@ module.exports.run = async (client, message, args) => {
     client.settings.setProp(message.guild.id, 'maxBuffer', args[0]);
     await message.channel.send(`Done! Your new maximal messages until mute is: ${args[0]}(Standart is 7)`);
 };
+
+exports.help = {
+    name: 'maxbuffer',
+    category: 'settings',
+    example: 'maxbuffer 8',
+    description: 'sets the maximal messages in the interval for antispam until mute/kick',
+};

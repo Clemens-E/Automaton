@@ -28,3 +28,10 @@ module.exports.run = async (client, message) => {
             .addField('Platform', `\`\`${os.platform()}\`\``, true));
     });
 };
+
+exports.help = {
+    name: 'botstats',
+    category: 'others',
+    example: 'botstats',
+    description: 'shows infos about this Bot',
+};

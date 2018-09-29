@@ -13,3 +13,10 @@ module.exports.run = async (client, message) => {
             message.delete(3000);
         });
 };
+
+exports.help = {
+    name: 'loghere',
+    category: 'settings',
+    example: 'loghere',
+    description: 'Sets the current channel as log message channel',
+};

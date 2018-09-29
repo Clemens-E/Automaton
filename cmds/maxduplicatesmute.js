@@ -4,3 +4,10 @@ module.exports.run = async (client, message, args) => {
     client.settings.setProp(message.guild.id, 'maxDuplicatesBan', args[0]);
     message.channel.send(`Done! Your new maximal duplicates messages until mute is: ${args[0]}(Standart is 7)`);
 };
+
+exports.help = {
+    name: 'maxduplicatesmute',
+    category: 'settings',
+    example: 'maxduplicateswarn 8',
+    description: 'Sets the maximal dublicate messages for antispam until mute/kick',
+};

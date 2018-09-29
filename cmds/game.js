@@ -22,3 +22,10 @@ module.exports.run = async (client, message, args) => {
             .setDescription(`${(members.size == 0) ? 'No User plays that game.' : `${allmember}`}`));
 
 };
+
+exports.help = {
+    name: 'game',
+    category: 'others',
+    example: 'game Honor',
+    description: 'searches for users that play that game',
+};

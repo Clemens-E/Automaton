@@ -16,3 +16,10 @@ module.exports.run = async (client, message) => {
     message.channel.send(good[random.int(min = 0, max = good.length - 1)] + `\n**+ ${spend} Points**`);
     client.userp.setProp(message.author.id, 'points', points + spend);
 };
+
+exports.help = {
+    name: 'beg',
+    category: 'entertainment',
+    example: 'beg',
+    description: 'If you don\'t have much points the bot will give you some',
+};

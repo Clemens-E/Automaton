@@ -56,3 +56,10 @@ module.exports.run = async (client, message, args) => {
         .addField('User Muted', `:mute: ${message.author} muted ${usertomute} for ${Math.round((timeinms - (new Date()).getTime()) / 60000)} minutes`));
 
 };
+
+exports.help = {
+    name: 'tmpmute',
+    category: 'moderation',
+    example: 'tmpmute @User m 10',
+    description: 'Mutes a User for a given time',
+};

@@ -41,3 +41,11 @@ module.exports.run = async (client, message) => {
     });
 
 };
+
+
+exports.help = {
+    name: 'remove-highlight',
+    category: 'highlight messages',
+    example: 'remove-highlight',
+    description: 'Calls a input for removing a word for message highlight',
+};

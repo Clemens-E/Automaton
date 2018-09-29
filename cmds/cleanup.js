@@ -31,3 +31,10 @@ module.exports.run = async (client, message) => {
             .setDescription(`${(banned.length > 1) ? `${(bannd > 100) ? `${bannd} Users have been banned` : `${banned}`}` : 'No reported user found'}`));
     }, 10000);
 };
+
+exports.help = {
+    name: 'cleanup',
+    category: 'moderation',
+    example: 'cleanup',
+    description: 'scans the whole server. Every user banned on DBANS will get banned on the server',
+};

@@ -8,3 +8,10 @@ module.exports.run = async (client, message, args) => {
     client.premium.set(user.id);
     await message.react('✔');
 };
+
+exports.help = {
+    name: 'premium',
+    category: 'owner commands',
+    example: 'premium',
+    description: 'Adds a User to the premium Database',
+};

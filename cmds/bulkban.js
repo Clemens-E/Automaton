@@ -26,3 +26,10 @@ module.exports.run = async (client, message, args) => {
     });
 
 };
+
+exports.help = {
+    name: 'bulkban',
+    category: 'moderation',
+    example: 'bulkban 139412744439988224 146048938242211840',
+    description: 'bans all given user IDs. good for banning multiple raiders or preventing them',
+};

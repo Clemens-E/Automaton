@@ -40,3 +40,10 @@ module.exports.run = async (client, message) => {
     });
 
 };
+
+exports.help = {
+    name: 'add-highlight',
+    category: 'highlight messages',
+    example: 'add-highlight',
+    description: 'Calls a input for adding a word for message highlight',
+};

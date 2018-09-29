@@ -18,3 +18,10 @@ module.exports.run = async (client, message) => {
             .setDescription(`${(output.length > 1) ? `${(banned > 100) ? `${banned} Users have a report on [DBANS](https://bans.discord.id/)` : `${output}`}` : 'No reported user found'}`));
     }, 10000);
 };
+
+exports.help = {
+    name: 'scan',
+    category: 'moderation',
+    example: 'scan',
+    description: 'scans the whole server. Every User banned on DBANS will get showed',
+};

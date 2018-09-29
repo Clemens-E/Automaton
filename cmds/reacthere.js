@@ -57,3 +57,11 @@ module.exports.run = async (client, message, args) => {
     });
 
 };
+
+
+exports.help = {
+    name: 'reacthere',
+    category: 'reaction role',
+    example: 'reacthere',
+    description: 'Calls a input for adding a message for reaction role',
+};

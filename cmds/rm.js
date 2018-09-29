@@ -16,3 +16,10 @@ module.exports.run = async (client, message) => {
     });
 
 };
+
+exports.help = {
+    name: 'rm',
+    category: 'moderation',
+    example: 'rm [number] <tag>',
+    description: 'deletes the amount of messages in the channel. Tag a User to only delete his messages',
+};

@@ -17,3 +17,10 @@ module.exports.run = async (client, message, args) => {
         .setDescription(`new prefix: \`${client.settings.getProp(message.guild.id, 'prefix')}\``));
 
 };
+
+exports.help = {
+    name: 'prefix',
+    category: 'settings',
+    example: 'prefix !',
+    description: 'Sets the prefix for this server',
+};

@@ -31,3 +31,10 @@ module.exports.run = async (client, message) => {
         .addField('**-------------------**', `**[all ranks](https://paste.discord.land/${link.body.key})**`));
 
 };
+
+exports.help = {
+    name: 'rank',
+    category: 'entertainment',
+    example: 'rank',
+    description: 'Shows your rank depending on your points. Also sends a link that shows all Users',
+};
