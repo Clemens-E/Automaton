@@ -16,7 +16,13 @@ client.userp = new Enmap({
 });
 
 process.on('unhandledRejection', error => {
-    $console.error(`Uncaught Promise Error: \n${error.stack}`);
+    if (client.ready) {
+        const channel = client.channels.get('497110812096200704');
+        channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.config.ce).setTimestamp());
+    }
+    else {
+        $console.error(error.stack);
+    }
 });
 antispam(client);
 fs.readdir('./events/', (err, files) => {
