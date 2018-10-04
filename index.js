@@ -17,7 +17,7 @@ client.userp = new Enmap({
 
 process.on('unhandledRejection', error => {
     if (client.ready) {
-        const channel = client.channels.get('497110812096200704');
+        const channel = client.channels.get(client.config.promise_rejections_channel);
         channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.config.ce).setTimestamp());
     }
     else {
