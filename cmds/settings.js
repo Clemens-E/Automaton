@@ -17,6 +17,7 @@ Log Channel: ${(client.channels.has(data.log_channel)) ? client.channels.get(dat
 Greet Users: ${(data.greet) ? 'Yes' : 'No'}
 Greet Channel: ${(client.channels.has(data.greet_channel)) ? client.channels.get(data.greet_channel) : 'None'}
 Ban Reported Users: ${(data.ban_reported_user) ? 'Yes' : 'No'}
+Highlight Words: \`${(data.highlight_it.join(', ').length < 100) ? data.highlight_it.join(', ') : data.highlight_it.join(', ').substring(0, 100)}\`
 `).setColor(client.config.cn);
             break;
         case 'reactions':
