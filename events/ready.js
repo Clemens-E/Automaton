@@ -9,6 +9,8 @@ module.exports = async (client) => {
     $console.success(`${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} users.`);
     $console.log(`logged in as ${client.user.tag}`);
     setInterval(changing_status, 12001);
+    const status = [`${client.guilds.size} Guilds`, 'Tag me for Info', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} Users`, `${client.channels.size} Channels`];
+
     setInterval(() => {
         const max = 500;
         const usage = process.memoryUsage().rss / 1024 / 1024 * 100 / 100;
@@ -25,20 +27,15 @@ module.exports = async (client) => {
                 .setDescription(`RAM Usage is \`${Math.round(usage / max)}\` the limit (${max} MB)`));
         }
     }, 5000);
-    function changing_status() {
-        const status = [`${client.guilds.size} Guilds`, 'Tag me for Info', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} Users`, `${client.channels.size} Channels`];
-        counter++;
-        if (counter == status.length) counter = 0;
-        client.user.setActivity(status[counter]);
-    }
+
     // Start the check if any user has to be unmuted
-    if (!client.settings.has('mutes')) {
-        client.settings.set('mutes', {
-            users_tempmute: 0,
-            users_muted_ids: [],
-        });
-    }
     setInterval(async () => {
+        if (!client.settings.has('mutes')) {
+            client.settings.set('mutes', {
+                users_tempmute: 0,
+                users_muted_ids: [],
+            });
+        }
         let times = client.settings.getProp('mutes', 'users_tempmute');
         const userinfo = client.settings.getProp('mutes', 'users_muted_ids');
         for (let i = 0; i < times * 3; i += 3) {
@@ -59,4 +56,11 @@ module.exports = async (client) => {
             }
         }
     }, 3000);
+
+    function changing_status() {
+        counter++;
+        if (counter == status.length) counter = 0;
+        client.user.setActivity(status[counter]);
+    }
 };
+
