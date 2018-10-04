@@ -3,3 +3,10 @@ module.exports.run = async (client, message) => {
         sent.edit(`Pong! Took ${sent.createdTimestamp - message.createdTimestamp}ms`);
     });
 };
+
+exports.help = {
+    name: 'ping',
+    category: 'others',
+    example: 'ping',
+    description: 'shows the ping',
+};
