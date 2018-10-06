@@ -13,14 +13,14 @@ module.exports.run = async (client, message, args) => {
     await member.ban(`${message.author} with reason: ${reason}`);
 
     message.channel.send(new Discord.RichEmbed()
-        .setColor(3127860)
+        .setColor(client.config.cs)
         .addField('User banned', `:white_check_mark: ${member.user.tag} was banned`));
     const logchannel = client.getLogchannel(message.guild.id);
 
     if (!logchannel) return message.reply(` __Warning:__ You don't have a log channel!\nPlease use \`${client.settings.getProp(message.guild.id, 'prefix')}loghere\` in the new log channel.`);
     if (!logchannel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.reply(' __Warning:__ I don\'t have the permission to send messages in your log channel.');
     logchannel.send(new Discord.RichEmbed()
-        .setColor(3127860)
+        .setColor(client.config.cs)
         .addField('User banned', `${message.author} banned ${member.user.tag} for \`${reason}\``));
 };
 
