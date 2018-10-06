@@ -41,7 +41,9 @@ module.exports = async (client) => {
         for (let i = 0; i < times * 3; i += 3) {
             const guild = client.guilds.get(userinfo[i + 2]);
             if (!guild || !guild.me.permissions.has('MANAGE_ROLES')) continue;
-            const member = guild.member(userinfo[i]);
+            let member;
+            member = await guild.fetchMember(userinfo[i]).catch(member = undefined);
+            if (!member) continue;
             const muteRole = guild.roles.find(r => r.name === 'muted by Automaton');
             if (!muteRole) continue;
             if (parseInt(userinfo[i + 1]) > Date.now()) {
