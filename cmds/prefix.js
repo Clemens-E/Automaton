@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     let prefix = client.settings.getProp(message.guild.id, 'prefix');
-    if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== client.config.ownerID) return message.reply('You need the permission `Manage Guild`');
+    if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== client.config.ownerid) return message.reply('You need the permission `Manage Guild`');
     if (!args[0]) return message.reply('That prefix is empty!\nexample of command:\n`' + prefix + 'prefix $` //New prefix is \'$\'');
     prefix = args.join(' ');
     if (prefix.length > 10) return message.channel.send('That prefix is too big. Please use a prexif under 10 symbols');
