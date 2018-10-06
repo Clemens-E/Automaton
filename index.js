@@ -9,11 +9,17 @@ const Lookup = require('./modules/lookup.js').Lookup;
 $console.success(`Process started at ${new Date(Date.now())}`);
 client.config = config;
 client.dbans = new Lookup(client.config.dbanstoken);
-Object.assign(client, Enmap.multi(['settings', 'reactsave', 'premium']));
+Object.assign(client, Enmap.multi(['settings', 'reactsave', 'premium', 'warns']));
 client.userp = new Enmap({
     name: 'userpoints',
     fetchAll: false,
 });
+
+client.settings.changed((k, ov, nv) => m(k, ov, nv));
+client.reactsave.changed((k, ov, nv) => m(k, ov, nv));
+client.premium.changed((k, ov, nv) => m(k, ov, nv));
+client.warns.changed((k, ov, nv) => m(k, ov, nv));
+client.userp.changed((k, ov, nv) => m(k, ov, nv));
 
 process.on('unhandledRejection', error => {
     if (client.ready) {
@@ -24,6 +30,7 @@ process.on('unhandledRejection', error => {
         $console.error(error.stack);
     }
 });
+
 antispam(client);
 fs.readdir('./events/', (err, files) => {
     let eventssize = 0;
@@ -52,7 +59,7 @@ fs.readdir('./cmds/', (err, files) => {
 });
 
 client.getLogchannel = (guildid) => {
-    if (typeof guildid !== 'string') throw 'channel must be a string.';
+    if (typeof guildid !== 'string') throw 'guild id must be a string.';
     const logchannel = client.channels.get(client.settings.getProp(guildid, 'log_channel'));
     if (logchannel && !logchannel.permissionsFor(client.user).has('SEND_MESSAGES')) return undefined;
     return logchannel;
@@ -64,6 +71,10 @@ Object.size = function (obj) {
         if (obj.hasOwnProperty(key)) size++;
     }
     return size;
+};
+
+const m = (keyName, oldValue, newValue) => {
+    console.log(`Value of ${keyName} has changed from: \n${JSON.stringify(oldValue)}\nto\n${JSON.stringify(newValue)}`);
 };
 
 client.login(config.token);
