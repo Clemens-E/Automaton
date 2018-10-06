@@ -4,6 +4,7 @@ module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
     if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
+    if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== client.config.ownerid) return message.reply('You need the permission `Manage Guild`');
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');
@@ -19,23 +20,23 @@ module.exports.run = async (client, message, args) => {
     // If they didnt say on / off args0 will be 'wi' (wrong input)
     if (on_off === null) args[0] = 'wi';
     switch (args[0]) {
-        case 'aspam_on':
+        case 'antispam':
         case 'highlight':
         case 'invite_del':
         case 'greet':
         case 'ban_reported_user':
             break;
         case 'wi':
-            return message.reply('Please add a `on` or `off` behind the setting.\n example: `setup aspam_on on`');
+            return message.reply('Please add a `on` or `off` behind the setting.\n example: `setup antispam on`');
         default:
             channel.send(new Discord.RichEmbed()
                 .setTitle('Overview')
-                .addField('aspam_on', 'if people send messages too quickly or\nthe same they get warned and later muted', true)
+                .addField('antispam', 'if people send messages too quickly or\nthe same they get warned and later muted', true)
                 .addField('ban_reported_user', 'will ban user that are listed on dbans', true)
                 .addField('highlight', 'saved keywords will be highlighed\nin logchannel', true)
                 .addField('greet', 'will send join and leavemessages\nin your defined welcome channel', true)
                 .addField('invite_del', 'deletes invites to guilds. Ignores members\nwith higher positions', true)
-                .setDescription('Example: `setup aspam_on on`')
+                .setDescription('Example: `setup antispam on`')
                 .setColor(client.config.ci)
             );
             return;
@@ -48,6 +49,6 @@ module.exports.run = async (client, message, args) => {
 exports.help = {
     name: 'setup',
     category: 'settings',
-    example: 'coming',
-    description: 'coming',
+    example: 'setup',
+    description: 'for changing the settings',
 };

@@ -16,7 +16,7 @@ module.exports = function (client) {
         if (msg.author.bot) return;
         if (msg.attachments.size > 0) return;
         if (!client.settings.has(msg.guild.id)) return;
-
+        if (!client.settings.getProp(msg.guild.id, 'antispam')) return;
         const map = client.settings.get(msg.guild.id);
 
         // If there aren't any specific settings just take the default.

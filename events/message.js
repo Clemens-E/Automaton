@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
             // If a Server is premium. Mostly depends if they donated
             premium: false,
             // If antispam is activated
-            aspam_on: false,
+            antispam: false,
             // If the bot should delete messages with invite links to other servers
             invite_del: false,
             // Channel where every important event (like ban/kick) gets logged

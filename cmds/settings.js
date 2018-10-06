@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args) => {
             data = client.settings.get(guild.id);
             embed = new Discord.RichEmbed().setTitle('All Settings').setDescription(`Prefix: \`${data.prefix}\`
 Premium: ${(data.premium) ? 'Yes' : 'No'}
-Anti-Spam on: ${(data.aspam_on) ? 'Yes' : 'No'}
+Anti-Spam on: ${(data.antispam) ? 'Yes' : 'No'}
 Delete Invites: ${(data.invite_del) ? 'Yes' : 'No'}
 Log Channel: ${(client.channels.has(data.log_channel)) ? client.channels.get(data.log_channel) : 'None'}
 Greet Users: ${(data.greet) ? 'Yes' : 'No'}
@@ -32,7 +32,7 @@ Highlight Words: \`${(data.highlight_it.join(', ').length < 100) ? data.highligh
             }
             break;
         default:
-            return channel.send('I only have `normal` and `reactions`');
+            return channel.send('I only have `normal` and `reactions`\nexample: `settings normal`');
     }
 
     channel.send(embed);
