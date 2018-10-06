@@ -13,4 +13,5 @@ module.exports = async (client, guild) => {
     .addField('Bots', guild.members.filter(m => m.user.bot).size, true));
   client.settings.delete(guild.id);
   client.reactsave.delete(guild.id);
+  client.warns.delete(guild.id);
 };
