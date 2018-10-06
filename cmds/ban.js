@@ -6,10 +6,10 @@ module.exports.run = async (client, message, args) => {
     if (!member) return message.channel.send('Please mention the member you want to ban');
     if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds yours.');
     if (!member.bannable) return message.channel.send('I can\'t ban that member');
-    if (member.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds mine.');
-    args[0] = '';
-    const reason = args.join(' ');
-    await member.ban(reason);
+    if (member.highestRole.position >= message.guilargs.shift();
+    const reason = args.join(' ');d.me.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds mine.');
+    
+    await member.ban(`${message.author} with reason: ${reason}`);
 
     message.channel.send(new Discord.RichEmbed()
         .setColor(3127860)

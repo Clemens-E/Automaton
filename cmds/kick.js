@@ -7,9 +7,9 @@ module.exports.run = async (client, message, args) => {
     if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds yours.');
     if (!member.kickable) return message.channel.send('I can\'t kick that member');
     if (member.highestRole.position >= message.guild.me.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds mine.');
-    args[0] = '';
+    args.shift();
     const reason = args.join(' ');
-    await member.kick(reason);
+    await member.kick(`${message.author} with reason: ${reason}`);
 
     message.channel.send(new Discord.RichEmbed()
         .setColor(3127860)
