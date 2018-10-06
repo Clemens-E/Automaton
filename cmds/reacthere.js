@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args) => {
     }
     const userperm = message.member.permissions;
     if (!userperm.has('MANAGE_ROLES')) return channel.send('You don\'t have enough permissions. You need\n`Manage Roles`\n');
-    const template = args[0].toLowerCase();
+    const template = (!args[0]) ? '' : args[0].toLowerCase();
     const premium = client.settings.getProp(guild.id, 'premium');
     let mtoadd;
     const messages = [];
