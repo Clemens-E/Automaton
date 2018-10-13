@@ -18,25 +18,25 @@ module.exports = async (client, reaction, user, index) => {
 
     // If the role doesnt exist send a message if possible and return
     if (!role && !logchannel) return;
-    else if (!role && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried removing role with the ID \`${data[`template_${index}_role`][position]}\` to ${user.tag}\nrole does not exists`));
+    else if (!role && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried removing role with the ID \`${data[`template_${index}_role`][position]}\` from ${user.tag}\nrole does not exists`));
 
-    const member = await reaction.message.guild.fetchMember(user.id);
+    const member = await reaction.message.guild.fetchMember(user);
     if (!member.roles.has(role.id)) return;
 
     // If the client does not have enough permissions, send a message if possible and return
-    if (!guild.me.permissions.has('MANAGE_ROLES') && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nmissing permission: \`manage roles\``));
+    if (!guild.me.permissions.has('MANAGE_ROLES') && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}.\nmissing permission: \`manage roles\``));
     else if (!guild.me.permissions.has('MANAGE_ROLES')) return;
 
     // If the role has more permissions than the bot we will get a promise rejection when we try to add the role
-    if (role.comparePositionTo(guild.me.highestRole) >= 0 && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nThe roles position equals or exceeds mine.`));
+    if (role.comparePositionTo(guild.me.highestRole) >= 0 && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}.\nThe roles position equals or exceeds mine.`));
     else if (role.comparePositionTo(guild.me.highestRole) >= 0) return;
     let success = true;
     await member.removeRole(role.id).catch(err => {
         success = false;
         $console.error(err);
     });
-    if (logchannel && !success) logchannel.send(new Discord.RichEmbed().setColor(client.config.ce).setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nunknown error! This was reported to the developer and soon be fixed`));
-    else if (logchannel && success) logchannel.send(new Discord.RichEmbed().setColor(client.config.cs).setDescription(`removed role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}`));
-    else if (!logchannel && !success) member.send(`The bot had trouble removing the role "${role.name}" to you.\nThis was reported to the developer and soon be fixed`);
+    if (logchannel && !success) logchannel.send(new Discord.RichEmbed().setColor(client.config.ce).setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}.\nunknown error! This was reported to the developer and soon be fixed`));
+    else if (logchannel && success) logchannel.send(new Discord.RichEmbed().setColor(client.config.cs).setDescription(`removed role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}`));
+    else if (!logchannel && !success) member.send(`The bot had trouble removing the role "${role.name}" from you.\nThis was reported to the developer and soon be fixed`);
 
 };

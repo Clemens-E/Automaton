@@ -20,7 +20,7 @@ module.exports = async (client, reaction, user, index) => {
     if (!role && !logchannel) return;
     else if (!role && logchannel) return logchannel.send(new Discord.RichEmbed().setDescription(`tried assigning role with the ID \`${data[`template_${index}_role`][position]}\` to ${user.tag}\nrole does not exists`));
 
-    const member = await reaction.message.guild.fetchMember(user.id);
+    const member = await reaction.message.guild.fetchMember(user);
     if (member.roles.has(role.id)) return;
 
     // If the client does not have enough permissions, send a message if possible and return
