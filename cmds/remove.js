@@ -92,7 +92,7 @@ module.exports.run = async (client, message, args) => {
         if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
         channel.send(new Discord.RichEmbed()
             .setColor(client.config.ci)
-            .setDescription(`The Emoji "${(!regex.test(emojitodelete)) ? emojitodelete : client.emojis.get(emojitodelete).toString()}" and the binded role "${roleout}" are deleted`));
+            .setDescription(`The Emoji "${(regex.test(emojitodelete)) ? emojitodelete : client.emojis.get(emojitodelete)}" and the binded role "${roleout}" are deleted`));
     });
 
 };
