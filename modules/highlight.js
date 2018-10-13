@@ -4,7 +4,7 @@ module.exports.run = async (client, message) => {
     const content = message.content.toLowerCase();
     const filtered = words.filter((c) => content.includes(c));
     if (filtered.length === 0) return;
-    const logchannel = client.getLogchannel(message.guild.id);
+    const logchannel = client.getLogChannel(message.guild.id);
     // What should I do without a logchannel? exactly nothing!
     if (!logchannel) return;
 

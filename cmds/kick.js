@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args) => {
     message.channel.send(new Discord.RichEmbed()
         .setColor(client.config.cs)
         .addField('User kicked', `:white_check_mark: ${member.user.tag} was kicked`));
-    const logchannel = client.getLogchannel(message.guild.id);
+    const logchannel = client.getLogChannel(message.guild.id);
 
     if (!logchannel) return message.reply(` __Warning:__ You don't have a log channel!\nPlease use \`${client.settings.getProp(message.guild.id, 'prefix')}loghere\` in the new log channel.`);
     if (!logchannel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.reply(' __Warning:__ I don\'t have the permission to send messages in your log channel.');

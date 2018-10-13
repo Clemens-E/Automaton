@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
     const reason = args.join(' ');
-    const logchannel = client.getLogchannel(guild.id);
+    const logchannel = client.getLogChannel(guild.id);
 
 
     if (!client.warns.has(guild.id)) client.warns.set(guild.id, {});
