@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const modified = require('./struct/extend.js');
+const client = new modified();
 const fs = require('fs');
 const $console = require('Console');
 const config = require('./config.json');
@@ -14,12 +15,6 @@ client.userp = new Enmap({
     name: 'userpoints',
     fetchAll: false,
 });
-
-client.settings.changed((k, ov, nv) => m(k, ov, nv));
-client.reactsave.changed((k, ov, nv) => m(k, ov, nv));
-client.premium.changed((k, ov, nv) => m(k, ov, nv));
-client.warns.changed((k, ov, nv) => m(k, ov, nv));
-client.userp.changed((k, ov, nv) => m(k, ov, nv));
 
 process.on('unhandledRejection', error => {
     if (client.ready) {
@@ -57,24 +52,5 @@ fs.readdir('./cmds/', (err, files) => {
     });
     $console.success(`loaded ${cmds} commands`);
 });
-
-client.getLogchannel = (guildid) => {
-    if (typeof guildid !== 'string') throw 'guild id must be a string.';
-    const logchannel = client.channels.get(client.settings.getProp(guildid, 'log_channel'));
-    if (logchannel && !logchannel.permissionsFor(client.user).has('SEND_MESSAGES')) return undefined;
-    return logchannel;
-};
-
-Object.size = function (obj) {
-    let size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-
-const m = (keyName, oldValue, newValue) => {
-    console.log(`Value of ${keyName} has changed from: \n${JSON.stringify(oldValue)}\nto\n${JSON.stringify(newValue)}`);
-};
 
 client.login(config.token);
