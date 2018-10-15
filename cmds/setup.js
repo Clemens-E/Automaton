@@ -21,10 +21,19 @@ module.exports.run = async (client, message, args) => {
     if (on_off === null) args[0] = 'wi';
     switch (args[0]) {
         case 'antispam':
+            client.settings.setProp(guild.id, 'antispam', on_off);
+            break;
         case 'highlight':
-        case 'invite_del':
+            client.settings.setProp(guild.id, 'highlight', on_off);
+            break;
+        case 'delete_invites':
+            client.settings.setProp(guild.id, 'invite_del', on_off);
+            break;
         case 'greet':
+            client.settings.setProp(guild.id, 'invite_del', on_off);
+            break;
         case 'ban_reported_user':
+            client.settings.setProp(guild.id, 'invite_del', on_off);
             break;
         case 'wi':
             return message.reply('Please add a `on` or `off` behind the setting.\n example: `setup antispam on`');
@@ -35,14 +44,13 @@ module.exports.run = async (client, message, args) => {
                 .addField('ban_reported_user', 'will ban user that are listed on dbans', true)
                 .addField('highlight', 'saved keywords will be highlighed\nin logchannel', true)
                 .addField('greet', 'will send join and leavemessages\nin your defined welcome channel', true)
-                .addField('invite_del', 'deletes invites to guilds. Ignores members\nwith higher positions', true)
+                .addField('delete_invites', 'deletes invites to guilds. Ignores members\nwith higher positions', true)
                 .setDescription('Example: `setup antispam on`')
                 .setColor(client.config.ci)
             );
             return;
 
     }
-    client.settings.setProp(guild.id, args[0], on_off);
     return message.reply(`${args[0]} is now ${args[1]}`);
 };
 
