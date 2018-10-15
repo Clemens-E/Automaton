@@ -41,7 +41,7 @@ module.exports.run = async (client, message) => {
         if (!emojis.includes(r.emoji.name)) return;
         switch (r.emoji.name) {
             case '⏩':
-                if (topicPage === Object.size(comds) - 1) return;
+                if (topicPage === Object.keys(comds).length - 1) return;
                 topicPage++; cmdPage = 0;
                 break;
             case '⏪':
