@@ -26,7 +26,7 @@ module.exports.run = async (client, message) => {
             .setDescription(`Name: ${comds[topicPage][cmdPage].name}
         description: ${comds[topicPage][cmdPage].description}
         example: \`${comds[topicPage][cmdPage].example}\``).setTitle(`Category: ${comds[topicPage][cmdPage].category}`)
-            .setFooter(`Command ${cmdPage + 1}/${comds[topicPage].length} | Category ${topicPage + 1}/${Object.size(comds)}`));
+            .setFooter(`Command ${cmdPage + 1}/${comds[topicPage].length} | Category ${topicPage + 1}/${Object.keys(comds).length}`));
     }, 4000);
     const filter = (r, u) => u.id === message.author.id;
     const rcollector = msg.createReactionCollector(filter, {
