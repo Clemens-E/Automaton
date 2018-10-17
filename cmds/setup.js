@@ -30,10 +30,10 @@ module.exports.run = async (client, message, args) => {
             client.settings.setProp(guild.id, 'invite_del', on_off);
             break;
         case 'greet':
-            client.settings.setProp(guild.id, 'invite_del', on_off);
+            client.settings.setProp(guild.id, 'greet', on_off);
             break;
         case 'ban_reported_user':
-            client.settings.setProp(guild.id, 'invite_del', on_off);
+            client.settings.setProp(guild.id, 'ban_reported_user', on_off);
             break;
         case 'wi':
             return message.reply('Please add a `on` or `off` behind the setting.\n example: `setup antispam on`');
