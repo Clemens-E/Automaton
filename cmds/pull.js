@@ -5,8 +5,8 @@ module.exports.run = async (client, message) => {
     child.exec('git pull origin master', async (err, stdout, stderr) => {
         if (err) throw err;
         if (stdout === 'Already up-to-date.\n') return await msg.edit(stdout);
-        await msg.edit(stdout + '\nNow restarting...');
-        client.settings.set('lastMessage', { msg: msg.id, channel: msg.channel.id });
+        await msg.edit(`\`\`\`${stdout}\`\`\`Now restarting...`);
+        client.settings.set('lastMessage', { msg: msg.id, channel: msg.channel.id, content: stdout });
         process.exit(0);
     });
 };
