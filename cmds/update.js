@@ -7,6 +7,7 @@ module.exports.run = async (client, message) => {
         if (stdout === 'Already up-to-date.\n') return msg.edit(stdout);
         await msg.edit(`\`\`\`fix${stdout}\`\`\`Now restarting...`);
         client.settings.set('lastMessage', { msg: msg.id, channel: msg.channel.id, content: stdout });
+        console.log('updated code. restarting now');
         process.exit(0);
     });
 };
