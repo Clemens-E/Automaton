@@ -2,7 +2,7 @@ const child = require('child_process');
 module.exports.run = async (client, message) => {
     if (message.author.id !== client.config.ownerid) return;
     const msg = await message.channel.send('executing pull command...');
-    child.exec('git pull origin master', (err, stdout, stderr) => {
+    child.exec('git pull origin master', async (err, stdout, stderr) => {
         if (err) throw err;
         if (stdout === 'Already up-to-date.') return await msg.edit(stdout);
         await msg.edit(stdout + '  Now restarting...');
