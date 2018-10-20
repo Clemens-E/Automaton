@@ -12,7 +12,6 @@ module.exports.run = async (client, message) => {
     });
 };
 
-
 exports.help = {
     name: 'update',
     category: 'owner commands',
