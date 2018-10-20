@@ -1,10 +1,10 @@
-const child = require('child_process');
+const { exec } = require('child_process');
 module.exports.run = async (client, message) => {
     if (message.author.id !== client.config.ownerid) return;
     const msg = await message.channel.send('executing pull command...');
-    child.exec('git pull origin master', async (err, stdout, stderr) => {
+    exec('git pull origin master', async (err, stdout, stderr) => {
         if (err) throw err;
-        if (stdout === 'Already up-to-date.\n') return await msg.edit(stdout);
+        if (stdout === 'Already up-to-date.\n') return msg.edit(stdout);
         await msg.edit(`\`\`\`${stdout}\`\`\`Now restarting...`);
         client.settings.set('lastMessage', { msg: msg.id, channel: msg.channel.id, content: stdout });
         process.exit(0);
