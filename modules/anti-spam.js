@@ -1,15 +1,11 @@
 const authors = [];
 const banned = [];
 const warned = [];
-let messagelog = [];
+const messagelog = [];
 
-setInterval(() => {
-    messagelog = [];
-}, 300000);
 
 module.exports = function (client) {
-    const warningMessage = 'You are writing fast or you send the exact same message every time. Please slow down.';
-    const banMessage = 'has been muted for spamming.';
+    const warningMessage = 'You are writing fast or you send the exact same message every time. Please slow down or you *will* be banned.';
     const set = (enmap, search, norm) => (enmap.hasOwnProperty(search)) ? enmap[search] : norm;
 
     client.on('message', msg => {
@@ -29,12 +25,13 @@ module.exports = function (client) {
 
         const now = Math.floor(Date.now());
         authors.push({
-            'time': now,
-            'author': msg.author.id,
+            time: now,
+            author: msg.author.id,
         });
         messagelog.push({
-            'message': msg.content,
-            'author': msg.author.id,
+            message: msg.content,
+            author: msg.author.id,
+            time: now,
         });
 
         // To not fill the ram we cut it down when it gets too big.
@@ -42,6 +39,11 @@ module.exports = function (client) {
             messagelog.shift();
         }
 
+        // Remove old message logs to prevent warning people saying "Hi" 5 times a day.
+        for (let index = messagelog.length; index > 0; index--) {
+            if (now <= messagelog.time + 300000) break;
+            messagelog.splice(index);
+        }
         // Check how many times the same message has been sent.
         let msgMatch = 0;
         for (let i = 0; i < messagelog.length; i++) {
@@ -82,6 +84,7 @@ module.exports = function (client) {
      */
     function warn(msg) {
         warned.push(msg.author.id);
+        if (msg.member.highestRole.position >= msg.guild.me.highestRole.position) return;
         msg.channel.send(msg.author + ' ' + warningMessage).then((mes) => mes.delete(5000));
     }
 
@@ -91,27 +94,22 @@ module.exports = function (client) {
      * @return {boolean} True or False
      */
     function ban(msg) {
+        if (msg.member.highestRole.position >= msg.guild.me.highestRole.position) return;
         for (let i = 0; i < messagelog.length; i++) {
-            if (messagelog[i].author == msg.author.id) {
+            if (messagelog[i].author === msg.author.id) {
                 messagelog.splice(i);
             }
         }
-
         banned.push(msg.author.id);
-
-        const user = msg.channel.guild.members.find(member => member.user.id === msg.author.id);
-        if (!user) return;
-        // will be replace with mute.
-        /*
-        user.ban().then(() => {
-            msg.channel.send(msg.author + ' ' + banMessage).then((mes) => mes.delete(5000));
-            return true;
-        }).catch(() => {
-            msg.channel.send('insufficient permission to kick ' + msg.author + ' for spamming.').then((mes) => mes.delete(5000));
-            return false;
+        msg.channel.send(`banning ${msg.author.tag}...`).then(m => {
+            msg.member.ban(1, 'banned for spamming').then(() => {
+                m.edit(`banned ${msg.author.tag} for spamming.`);
+                if (client.getLogChannel(msg.guild.id)) client.getLogChannel(msg.guild.id).send(`banned ${msg.author.tag} for spamming.`);
+            }).catch(() => {
+                m.edit(`failed banning ${msg.author.tag}`);
+                if (client.getLogChannel(msg.guild.id)) client.getLogChannel(msg.guild.id).send(`failed banning ${msg.author.tag} for spamming.`);
+            });
         });
-        */
-        msg.channel.send(`you would have been banned. ${msg.member}`);
     }
 
 };
