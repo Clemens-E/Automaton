@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const $console = require('Console');
 module.exports.run = async (client, message) => {
+    // API Down
+    return;
     let banned = '';
     let bannd = 0;
     if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('You don\'t have enough permissions to ban members');
