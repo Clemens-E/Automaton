@@ -19,6 +19,8 @@ module.exports = async (client, member) => {
         greetchannel.send(wmsg);
     }
     // Search for the user in DBANS
+    // API Down so dont do that.
+    return;
     const search = await client.dbans.lookup(member.id);
     if (!search.banned) return;
 
