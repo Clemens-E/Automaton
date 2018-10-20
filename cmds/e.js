@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const snekfetch = require('snekfetch');
+const child = require('child_process');
 module.exports.run = async (client, message, args) => {
     if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
     if (message.author.id !== client.config.ownerid) return;
