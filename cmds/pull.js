@@ -3,7 +3,7 @@ module.exports.run = async (client, message) => {
     if (message.author.id !== client.config.ownerid) return;
     const msg = await message.channel.send('executing pull command...');
     child.exec('git pull origin master', (err, stdout, stderr) => {
-        if (err) return msg.edit(err);
+        if (err) throw err;
         if (stdout === 'Already up-to-date.') return msg.edit(stdout);
         msg.edit(stdout + '  Now restarting...');
         client.settings.set('lastMessage', { msg: msg.id, channel: msg.channel.id });
