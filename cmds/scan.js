@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message) => {
+    // API Down
+    return;
     let output = '';
     let banned = 0;
     const msg = await message.channel.send('<a:wow:478355746946416642> Checking Members');
