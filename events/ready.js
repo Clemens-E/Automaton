@@ -3,6 +3,12 @@ const heapdump = require('heapdump');
 const Discord = require('discord.js');
 module.exports = async (client) => {
     client.ready = true;
+    if (client.settings.has('lastMessage')) {
+        const dat = client.settings.get('lastMessage');
+        const msg = await client.channels.get(dat.channel).fetchMessage(dat.msg);
+        msg.edit('***Restart completed.***');
+        client.settings.delete('lastMessage');
+    }
     let counter = 0;
     let ramovermax = false;
     $console.success(`client is ready after ${process.uptime() * 1000 - client.uptime} Milliseconds`);
