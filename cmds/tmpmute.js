@@ -37,7 +37,7 @@ module.exports.run = async (client, message, args) => {
     if (!message.guild.me.permissions.has('MANAGE_CHANNELS')) return message.channel.send('I need the permission `Manage Channels`');
     const channelsWithMissingPermissions = message.guild.channels.filter(c => !c.permissionsFor(message.guild.me).has('MANAGE_ROLES'));
     if (channelsWithMissingPermissions.size > 0) {
-        message.channel.send(`I can't mute the memeber in:\n${channelsWithMissingPermissions.map(c => c.toString() + '\n')}\nIam missing the \`manage permissions\` permission in them`);
+        message.channel.send(`I can't mute the memeber in:\n${channelsWithMissingPermissions.map(c => '\n' + c.toString())}\nIam missing the \`manage permissions\` permission in them`);
     }
     message.guild.channels.map(async channel => {
         await channel.overwritePermissions(fmuterole, {
