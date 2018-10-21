@@ -4,6 +4,9 @@ const child = require('child_process');
 module.exports.run = async (client, message, args) => {
     if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
     if (message.author.id !== client.config.ownerid) return;
+    // for later use in the evaled code
+    const channel = message.channel;
+    const guild = message.guild;
     try {
         const code = args.join(' ');
         let evaled = eval(code);
