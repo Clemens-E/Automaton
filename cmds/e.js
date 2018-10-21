@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args) => {
     try {
         const code = args.join(' ');
         let evaled = eval(code);
-        // evaled = evaled.replace(client.token,"NDAwNzg5OTczMTg1NTkzMzQ2.DTgxDw.Qh8XS0SrX7zR3WRAC1cOsgBrvS8");
+        evaled = evaled.replace(client.token, '"No"');
         if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled); }
         if (evaled.length < 2000) {
             message.channel.send(clean(evaled), {
