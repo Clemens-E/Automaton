@@ -6,7 +6,7 @@ module.exports = async (client) => {
     if (client.settings.has('lastMessage')) {
         const dat = client.settings.get('lastMessage');
         const msg = await client.channels.get(dat.channel).fetchMessage(dat.msg);
-        msg.edit(`\`\`\`css\n${dat.content}\`\`\`***restart completed***`);
+        msg.edit(`\`\`\`css\n${dat.content}\`\`\`*restart completed*`);
         client.settings.delete('lastMessage');
     }
     let counter = 0;
