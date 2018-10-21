@@ -10,8 +10,8 @@ module.exports.run = async (client, message, args) => {
     try {
         const code = args.join(' ');
         let evaled = eval(code);
-        evaled = evaled.replace(client.token, '"No"');
         if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled); }
+        evaled = evaled.replace(client.token, '"No"');
         if (evaled.length < 2000) {
             message.channel.send(clean(evaled), {
                 code: 'xl',
