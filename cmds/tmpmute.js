@@ -35,12 +35,15 @@ module.exports.run = async (client, message, args) => {
         });
     }
     if (!message.guild.me.permissions.has('MANAGE_CHANNELS')) return message.channel.send('I need the permission `Manage Channels`');
-
+    const channelsWithMissingPermissions = message.guild.channels.filter(c => !c.permissionsFor(message.guild.me).has('MANAGE_ROLES'));
+    if (channelsWithMissingPermissions.size > 0) {
+        message.channel.send(`I can't mute the memeber in:\n${channelsWithMissingPermissions.map(c => c.toString() + '\n')}\nIam missing the \`manage permissions\` permission in them`);
+    }
     message.guild.channels.map(async channel => {
         await channel.overwritePermissions(fmuterole, {
             SEND_MESSAGES: false,
             ADD_REACTIONS: false,
-        });
+        }).catch((O_o) => O_o);
     });
     if (usertomute.roles.has(fmuterole.id)) return message.channel.send('User is already muted.');
     await usertomute.addRole(fmuterole);
@@ -49,7 +52,7 @@ module.exports.run = async (client, message, args) => {
         .addField('User Muted', `:white_check_mark: ${usertomute} is muted ${Math.round((timeinms - (new Date()).getTime()) / 60000)}m long`));
     const logchannel = client.settings.getProp(message.guild.id, 'log_channel');
 
-    if (!client.channels.has(logchannel)) return message.reply(` __Warning:__ You don't have a log channel!\nPlease use \`${client.settings.getProp(message.guild.id, 'prefix')}loghere\` in the new log channel.`);
+    if (!client.channels.has(logchannel)) return message.reply(` __Warning: __ You don't have a log channel!\nPlease use \`${client.settings.getProp(message.guild.id, 'prefix')}loghere\` in the new log channel.`);
     if (!client.channels.get(logchannel).permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.reply(' __Warning:__ I don\'t have the permission to send messages in your log channel.');
     client.channels.get(logchannel).send(new Discord.RichEmbed()
         .setColor(client.config.cs)
