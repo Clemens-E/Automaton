@@ -16,6 +16,7 @@ client.userp = new Enmap({
     fetchAll: false,
 });
 
+
 process.on('unhandledRejection', error => {
     if (client.ready) {
         const channel = client.channels.get(client.config.promise_rejections_channel);
