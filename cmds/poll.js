@@ -29,6 +29,6 @@ module.exports.run = async (client, message, args) => {
 exports.help = {
     name: 'poll',
     category: 'others',
-    example: 'stealemote https://cdn.discordapp.com/emojis/498513312569360387.gif?v=1 wow',
-    description: 'adds the linked emoji to the guild. add a name behind the url',
+    example: 'poll 100 is this bot good?',
+    description: 'creates a poll message where users can vote.',
 };
