@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args) => {
     let changed = 0;
     hoisted.forEach(element => {
         if (element.highestRole.position >= message.guild.me.highestRole.position) return;
-        element.setNickname('no hoisting');
+        element.setNickname('no hoisting', `dehoisting runned by ${message.author.tag}`);
         changed++;
     });
     msg.edit(`changed ${changed} Nicknames of ${hoisted.size} hoisted users.`);
