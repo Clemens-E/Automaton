@@ -13,7 +13,7 @@ module.exports.run = async (client, message) => {
         element.setNickname('no hoisting', `dehoisting runned by ${message.author.tag}`);
         changed++;
     });
-    setTimeout(msg.edit(`changed ${changed} Nicknames of ${hoisted.size} hoisted users.`), 2000);
+    setTimeout(() => msg.edit(`changed ${changed} Nicknames of ${hoisted.size} hoisted users.`), 2000);
 };
 
 exports.help = {
