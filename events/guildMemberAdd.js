@@ -18,6 +18,13 @@ module.exports = async (client, member) => {
         wmsg = wmsg.replace('{guild}', member.guild.name);
         greetchannel.send(wmsg);
     }
+    if (client.settings.getProp(member.guild.id, 'invite_del')) {
+        const re = new RegExp('(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]');
+        if (member.user.username.match(re)) {
+            member.send('Please change your username to join this Guild.');
+            member.kick('Invite in his username');
+        }
+    }
     // Search for the user in DBANS
     // API Down so dont do that.
     return;
