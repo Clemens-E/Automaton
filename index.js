@@ -21,7 +21,7 @@ process.on('unhandledRejection', error => {
     $console.error(error.stack);
     if (client.ready) {
         const channel = client.channels.get(client.config.promise_rejections_channel);
-        channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.config.ce).setTimestamp());
+        channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.config.ce).setTimestamp()).catch((O_o) => O_o);
     }
 });
 
