@@ -101,7 +101,7 @@ module.exports = function (client) {
             }
         }
         banned.push(msg.author.id);
-        msg.channel.send(`banning ${msg.author.tag}...`).then(m => {
+        msg.channel.send(`${client.config.loading} banning ${msg.author.tag}`).then(m => {
             msg.member.ban(1, 'banned for spamming').then(() => {
                 m.edit(`banned ${msg.author.tag} for spamming.`);
                 if (client.getLogChannel(msg.guild.id)) client.getLogChannel(msg.guild.id).send(`banned ${msg.author.tag} for spamming.`);

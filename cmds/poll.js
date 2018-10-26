@@ -15,8 +15,8 @@ module.exports.run = async (client, message, args) => {
         .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${timeout / 1000} Seconds time to react`)
         .setTimestamp());
-    await msg.react('👎');
     await msg.react('👍');
+    await msg.react('👎');
     const filter = (reaction) => reaction.emoji.name === '👎' || reaction.emoji.name === '👍';
     msg.awaitReactions(filter, { time: timeout }).then(c => {
         const down = c.filter(r => r.emoji.name === '👎').size;

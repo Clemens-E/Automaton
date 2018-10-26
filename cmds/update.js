@@ -5,9 +5,9 @@ module.exports.run = async (client, message) => {
     exec('git pull origin master', async (err, stdout) => {
         if (err) throw err;
         if (stdout === 'Already up-to-date.\n') return msg.edit(stdout);
-        await msg.edit(`${client.config.updating}\`\`\`fix\n${stdout}\`\`\`Now restarting...`);
+        await msg.edit(`${client.config.updating}\`\`\`fix\n${stdout}\`\`\`${client.config.loading}Now restarting`);
         client.settings.set('lastMessage', { msg: msg.id, channel: msg.channel.id, content: stdout });
-        console.log('updated code. restarting now ');
+        console.log('updated code. restarting now');
         process.exit(0);
     });
 };

@@ -4,7 +4,7 @@ module.exports.run = async (client, message) => {
     return;
     let output = '';
     let banned = 0;
-    const msg = await message.channel.send('<a:wow:478355746946416642> Checking Members');
+    const msg = await message.channel.send(`${client.config.loading} Checking Members`);
     await message.guild.members.forEach(async (m) => {
         const r = await client.dbans.lookup(m.id);
         if (r.banned) {
