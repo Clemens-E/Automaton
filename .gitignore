@@ -2,4 +2,3 @@ node_modules/
 data/
 heapdump/
 config.json
-.eslintrc.json
