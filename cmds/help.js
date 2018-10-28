@@ -8,11 +8,12 @@ module.exports.run = async (client, message) => {
     });
     const comds = {
         0: cmds.filter(m => m.category === 'settings'),
-        1: cmds.filter(m => m.category === 'reaction role'),
-        2: cmds.filter(m => m.category === 'highlight messages'),
-        3: cmds.filter(m => m.category === 'entertainment'),
-        4: cmds.filter(m => m.category === 'others'),
-        5: cmds.filter(m => m.category === 'owner commands'),
+        1: cmds.filter(m => m.category === 'moderation'),
+        2: cmds.filter(m => m.category === 'reaction role'),
+        3: cmds.filter(m => m.category === 'highlight messages'),
+        4: cmds.filter(m => m.category === 'entertainment'),
+        5: cmds.filter(m => m.category === 'others'),
+        6: cmds.filter(m => m.category === 'owner commands'),
     };
     let topicPage = 0;
     let cmdPage = 0;
