@@ -14,7 +14,6 @@ module.exports = async (client) => {
     $console.success(`client is ready after ${process.uptime() * 1000 - client.uptime} Milliseconds`);
     $console.success(`${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} users.`);
     $console.log(`logged in as ${client.user.tag}`);
-    setInterval(changing_status, 12001);
     const status = [`${client.guilds.size} Guilds`, 'Tag me for Info', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} Users`, `${client.channels.size} Channels`];
 
     setInterval(() => {
@@ -64,7 +63,7 @@ module.exports = async (client) => {
             }
         }
     }, 3000);
-
+    setInterval(changing_status, 12001);
     function changing_status() {
         counter++;
         if (counter == status.length) counter = 0;
