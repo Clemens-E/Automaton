@@ -52,4 +52,4 @@ fs.readdir('./cmds/', (err, files) => {
     $console.success(`loaded ${cmds} commands`);
 });
 
-client.login(config.token);
+client.login(client.config.token);
