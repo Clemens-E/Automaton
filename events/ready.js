@@ -28,7 +28,7 @@ module.exports = async (client) => {
                 $console.success('dump written to', filename);
             });
             client.channels.get('461211772804792320').send(new Discord.RichEmbed()
-                .setColor(client.config.cw)
+                .setColor(client.infos.cw)
                 .setFooter(`RAM Usage: ${usage}`)
                 .setDescription(`RAM Usage is \`${Math.round(usage / max)}\` the limit (${max} MB)`));
         }

@@ -27,7 +27,7 @@ module.exports.run = async (client, message) => {
     });
     setTimeout(function () {
         msg.edit(new Discord.RichEmbed()
-            .setColor(client.config.cw)
+            .setColor(client.infos.cw)
             .setTitle('**Scan results**')
             .addField(`Banned ${bannd} ${(bannd == 1) ? 'Member' : 'Members'}`, '** **')
             .setDescription(`${(banned.length > 1) ? `${(bannd > 100) ? `${bannd} Users have been banned` : `${banned}`}` : 'No reported user found'}`));

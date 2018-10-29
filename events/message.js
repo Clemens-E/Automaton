@@ -63,7 +63,7 @@ module.exports = async (client, message) => {
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>)`);
     if (prefixRegex.test(message.content)) {
         message.channel.send(new Discord.RichEmbed()
-            .setColor(client.config.cn)
+            .setColor(client.infos.cn)
             .addField('Info', `Prefix on this Server: \`${prefix}\`\nDo \`${prefix}help\` for more information`));
     }
     if (message.content.indexOf(prefix) !== 0) return;

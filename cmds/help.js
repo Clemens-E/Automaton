@@ -20,7 +20,7 @@ module.exports.run = async (client, message) => {
     const embed = new Discord.RichEmbed()
         .setTitle('Help Text')
         .setDescription('React with ▶ to see the next command.\nReact with ⏩ to skip to the next category')
-        .setColor(client.config.cn);
+        .setColor(client.infos.cn);
     const msg = await message.channel.send(embed);
     setTimeout(() => {
         msg.edit(new Discord.RichEmbed(msg.embeds[0])

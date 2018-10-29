@@ -55,7 +55,7 @@ module.exports.run = async (client, message, args) => {
                 }
             }
             channel.send(new Discord.RichEmbed()
-                .setColor(client.config.ci)
+                .setColor(client.infos.ci)
                 .setDescription(`I deleted ${deleted} emojis and it's binded roles`));
             break;
         default:
@@ -91,7 +91,7 @@ module.exports.run = async (client, message, args) => {
         const roleout = (guild.roles.has(roletodelete)) ? (guild.roles.get(roletodelete).mentionable) ? `${guild.roles.get(roletodelete).toString()}` : `\`${guild.roles.get(roletodelete).name}\`` : `Roles doesnt exist. ID: ${roletodelete}`;
         if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
         channel.send(new Discord.RichEmbed()
-            .setColor(client.config.ci)
+            .setColor(client.infos.ci)
             .setDescription(`The Emoji "${(regex.test(emojitodelete)) ? emojitodelete : client.emojis.get(emojitodelete)}" and the binded role "${roleout}" are deleted`));
     });
 

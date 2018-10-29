@@ -36,8 +36,8 @@ module.exports = async (client, reaction, user, index) => {
         $console.error(err);
     });
     if (success) client.reactsave.inc(guild.id, 'counter');
-    if (logchannel && !success) logchannel.send(new Discord.RichEmbed().setColor(client.config.ce).setDescription(`tried assigning role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nunknown error! This was reported to the developer and soon be fixed`));
-    else if (logchannel && success) logchannel.send(new Discord.RichEmbed().setColor(client.config.cs).setDescription(`assinged role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}`));
+    if (logchannel && !success) logchannel.send(new Discord.RichEmbed().setColor(client.infos.ce).setDescription(`tried assigning role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}.\nunknown error! This was reported to the developer and soon be fixed`));
+    else if (logchannel && success) logchannel.send(new Discord.RichEmbed().setColor(client.infos.cs).setDescription(`assinged role ${(role.mentionable) ? `${role}` : `"${role.name}"`} to ${member}`));
     else if (!logchannel && !success) member.send(`The bot had trouble adding the role "${role.name}" to you.\nThis was reported to the developer and soon be fixed`);
 
 };

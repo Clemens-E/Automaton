@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
     const embed = new Discord.RichEmbed()
         .setTitle(member.user.username + '\' avatar')
         .setImage(member.user.avatarURL)
-        .setColor(client.config.ci);
+        .setColor(client.infos.ci);
     message.channel.send({
         embed,
     });

@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) => {
     if (!message.guild.me.permissions.has('BAN_MEMBERS')) return message.channel.send('I don\'t have enough permissions to ban members');
     if (args.length > 20) return message.channel.send('Only 20 IDs maximum');
     if (!args[0]) return message.channel.send('Please provide at least one user ID');
-    const embed = new Discord.RichEmbed().setColor(client.config.cs).setTitle('Bulk Ban result');
+    const embed = new Discord.RichEmbed().setColor(client.infos.cs).setTitle('Bulk Ban result');
     const guild = await message.guild.fetchMembers();
     let banned = '';
     const members = [];

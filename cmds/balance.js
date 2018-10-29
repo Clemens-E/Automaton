@@ -5,7 +5,7 @@ module.exports.run = async (client, message) => {
     if (client.userp.has(message.author.id)) points = client.userp.get(message.author.id, 'points');
     else points = 150;
     message.channel.send(new Discord.RichEmbed()
-        .setColor(client.config.ci)
+        .setColor(client.infos.ci)
         .setTitle(`See ${message.author.tag}'s Bank balance`)
         .addField('**-------------------**', '** **')
         .addField(`current points: ${points}`, '** **')

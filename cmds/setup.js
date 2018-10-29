@@ -46,7 +46,7 @@ module.exports.run = async (client, message, args) => {
                 .addField('greet', 'will send join and leavemessages\nin your defined welcome channel', true)
                 .addField('delete_invites', 'deletes invites to guilds. Ignores members\nwith higher positions', true)
                 .setDescription('Example: `setup antispam on`')
-                .setColor(client.config.ci)
+                .setColor(client.infos.ci)
             );
             return;
 

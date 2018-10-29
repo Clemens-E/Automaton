@@ -53,7 +53,7 @@ module.exports.run = async (client, message) => {
             if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);
             return channel.send('No answer passed or command was cancelled. Mission abort!');
         }
-        channel.send(new Discord.RichEmbed().setTitle(`${member.user.tag}'s Game result`).setDescription(`The Word was: \`${game.word}\`\nTotal Guesses: \`${game.totalGuesses}\`\nWrong Guesses: \`${game.failedGuesses}\`\nStatus: \`${game.status}\`\n\`${(game.status === 'WON') ? '+ 90 Points' : '- 30 Points'}\``).setColor(client.config.ci));
+        channel.send(new Discord.RichEmbed().setTitle(`${member.user.tag}'s Game result`).setDescription(`The Word was: \`${game.word}\`\nTotal Guesses: \`${game.totalGuesses}\`\nWrong Guesses: \`${game.failedGuesses}\`\nStatus: \`${game.status}\`\n\`${(game.status === 'WON') ? '+ 90 Points' : '- 30 Points'}\``).setColor(client.infos.ci));
         if (game.status === 'WON') client.userp.setProp(member.id, 'points', points + 60);
         else client.userp.setProp(member.id, 'points', points - 30);
         if (messages.length <= 99 && messages.length > 0) channel.bulkDelete(messages).catch((O_o) => O_o);

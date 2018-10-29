@@ -19,11 +19,11 @@ Greet Users: ${(data.greet) ? 'Yes' : 'No'}
 Greet Channel: ${(client.channels.has(data.greet_channel)) ? client.channels.get(data.greet_channel) : 'None'}
 Ban Reported Users: ${(data.ban_reported_user) ? 'Yes' : 'No'}
 Highlight Words: \`${(data.highlight_it.join(', ').length < 100) ? data.highlight_it.join(', ') : data.highlight_it.join(', ').substring(0, 100)}\`
-`).setColor(client.config.cn);
+`).setColor(client.infos.cn);
             break;
         case 'reactions':
             data = client.reactsave.get(guild.id);
-            embed = new Discord.RichEmbed().setTitle('All Reaction Settings').setColor(client.config.cn).setDescription(`Total roles added: ${data.counter}`);
+            embed = new Discord.RichEmbed().setTitle('All Reaction Settings').setColor(client.infos.cn).setDescription(`Total roles added: ${data.counter}`);
             for (let i = 0; i < arr.length; i++) {
                 embed = embed.addField(`Template ${arr[i]}`, `
   Roles:${data[`template_${arr[i]}_role`].map(r => (guild.roles.has(r)) ? (guild.roles.get(r).mentionable) ? ` ${guild.roles.get(r).toString()}` : ` \`${guild.roles.get(r).name}\`` : ' `Role doesn\'t exist`')}

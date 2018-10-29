@@ -3,12 +3,12 @@ const modified = require('./struct/extend.js');
 const client = new modified();
 const fs = require('fs');
 const $console = require('Console');
-const config = require('./config.json');
 const Enmap = require('enmap');
 const antispam = require('./modules/anti-spam.js');
 const Lookup = require('./modules/lookup.js').Lookup;
 $console.success(`Process started at ${new Date(Date.now())}`);
-client.config = config;
+client.config = require('./config.json');
+client.infos = require('./infos.json');
 client.dbans = new Lookup(client.config.dbanstoken);
 Object.assign(client, Enmap.multi(['settings', 'reactsave', 'premium', 'warns']));
 client.userp = new Enmap({
@@ -20,8 +20,8 @@ client.userp = new Enmap({
 process.on('unhandledRejection', error => {
     $console.error(error.stack);
     if (client.ready) {
-        const channel = client.channels.get(client.config.promise_rejections_channel);
-        channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.config.ce).setTimestamp()).catch((O_o) => O_o);
+        const channel = client.channels.get(client.infos.promise_rejections_channel);
+        channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.infos.ce).setTimestamp()).catch((O_o) => O_o);
     }
 });
 

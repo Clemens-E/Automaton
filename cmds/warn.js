@@ -20,13 +20,13 @@ module.exports.run = async (client, message, args) => {
     const warns = client.warns.getProp(guild.id, member.id);
 
     channel.send(new Discord.RichEmbed()
-        .setColor(client.config.cw)
+        .setColor(client.infos.cw)
         .addField('User warned', `${message.author} warned ${member} for \`${reason}\``)
         .setFooter(`this is ${member.user.tag}'s ${warns} warn.`));
 
     if (!member.user.bot) {
         member.send(new Discord.RichEmbed()
-            .setColor(client.config.cw)
+            .setColor(client.infos.cw)
             .addField(`You where warned on \`${guild.name}\``, `${message.author} warned you for \`${reason}\``)
             .setFooter(`this is your ${warns} warn.`));
     }
@@ -34,7 +34,7 @@ module.exports.run = async (client, message, args) => {
     if (!logchannel) return message.reply(` __Warning:__ You don't have a log channel!\nPlease use \`${client.settings.getProp(message.guild.id, 'prefix')}loghere\` in the new log channel.`);
     if (!logchannel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.reply(' __Warning:__ I don\'t have the permission to send messages in your log channel.');
     logchannel.send(new Discord.RichEmbed()
-        .setColor(client.config.cw)
+        .setColor(client.infos.cw)
         .addField('User warned', `${message.author} warned ${member} for \`${reason}\``)
         .setFooter(`this is ${member.user.tag}'s ${warns} warn.`));
 };

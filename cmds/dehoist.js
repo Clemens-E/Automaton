@@ -4,10 +4,10 @@ module.exports.run = async (client, message) => {
     if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
     if (!message.member.hasPermission('MANAGE_NICKNAMES') && message.author.id !== client.config.ownerid) return message.reply('You need the permission `Manage Nicknames`');
     if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.reply('I need the permission `Manage Nicknames`');
-    const msg = await channel.send(`${client.config.loading} fetching members.`);
+    const msg = await channel.send(`${client.infos.loading} fetching members.`);
 
     const hoisted = guild.members.filter(m => !new RegExp(/^([a-z]|[0-9])/, 'i').test(m.displayName));
-    await msg.edit(`found ${hoisted.size} hoisted users.\nnow dehoisting ${client.config.loading}`);
+    await msg.edit(`found ${hoisted.size} hoisted users.\nnow dehoisting ${client.infos.loading}`);
     let changed = 0;
     hoisted.forEach(element => {
         if (element.highestRole.position >= message.guild.me.highestRole.position) return;

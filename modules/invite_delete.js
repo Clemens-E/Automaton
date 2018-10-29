@@ -12,7 +12,7 @@ module.exports.run = async (client, message) => {
     if (!client.channels.has(logchannel)) return;
     if (!client.channels.get(logchannel).permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
     client.channels.get(logchannel).send(new Discord.RichEmbed()
-        .setColor(client.config.cw)
+        .setColor(client.infos.cw)
         .setFooter(`Automod ֍ message ID: ${message.id}`)
         .setDescription(`message of ${message.author} in ${message.channel} was deleted because it contained a invite link`));
 

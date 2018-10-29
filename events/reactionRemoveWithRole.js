@@ -35,8 +35,8 @@ module.exports = async (client, reaction, user, index) => {
         success = false;
         $console.error(err);
     });
-    if (logchannel && !success) logchannel.send(new Discord.RichEmbed().setColor(client.config.ce).setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}.\nunknown error! This was reported to the developer and soon be fixed`));
-    else if (logchannel && success) logchannel.send(new Discord.RichEmbed().setColor(client.config.cs).setDescription(`removed role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}`));
+    if (logchannel && !success) logchannel.send(new Discord.RichEmbed().setColor(client.infos.ce).setDescription(`tried removing role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}.\nunknown error! This was reported to the developer and soon be fixed`));
+    else if (logchannel && success) logchannel.send(new Discord.RichEmbed().setColor(client.infos.cs).setDescription(`removed role ${(role.mentionable) ? `${role}` : `"${role.name}"`} from ${member}`));
     else if (!logchannel && !success) member.send(`The bot had trouble removing the role "${role.name}" from you.\nThis was reported to the developer and soon be fixed`);
 
 };

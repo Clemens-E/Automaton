@@ -78,7 +78,7 @@ module.exports.run = async (client, message, args) => {
                 return channel.send('Time went out or the command was cancelled. No emoji added. Role removed');
             }
             channel.send(new Discord.RichEmbed()
-                .setColor(client.config.ci)
+                .setColor(client.infos.ci)
                 .setDescription(`Added \`${guild.roles.get(roletoadd).name}\` with ${guild.roles.get(roletoadd).members.size} member(s). The emoji binded to that role is "${(client.emojis.has(emojitoadd)) ? client.emojis.get(emojitoadd).toString() : emojitoadd}"`));
             client.reactsave.pushIn(guild.id, `template_${template}_emoji`, emojitoadd, true);
             client.reactsave.pushIn(guild.id, `template_${template}_role`, roletoadd, true);

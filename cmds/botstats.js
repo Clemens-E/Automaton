@@ -14,7 +14,7 @@ module.exports.run = async (client, message) => {
         const duration = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
         message.channel.send(new Discord.RichEmbed()
             .setTitle('*** Stats ***')
-            .setColor(client.config.cn)
+            .setColor(client.infos.cn)
             .addField('Memory Usage', `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} / ${(os.totalmem() / 1024 / 1024).toFixed(2)} MB`, true)
             .addField('Uptime ', `${duration}`, true)
             .addField('Users', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)}`, true)
