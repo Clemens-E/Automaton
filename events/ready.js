@@ -9,12 +9,10 @@ module.exports = async (client) => {
         msg.edit(`\`\`\`css\n${dat.content}\`\`\`*restart completed*`);
         client.settings.delete('lastMessage');
     }
-    let counter = 0;
     let ramovermax = false;
     $console.success(`client is ready after ${process.uptime() * 1000 - client.uptime} Milliseconds`);
     $console.success(`${client.channels.size} channels on ${client.guilds.size} servers, for a total of ${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} users.`);
     $console.log(`logged in as ${client.user.tag}`);
-    const status = [`${client.guilds.size} Guilds`, 'Tag me for Info', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} Users`, `${client.channels.size} Channels`];
 
     setInterval(() => {
         const max = 500;
@@ -63,6 +61,8 @@ module.exports = async (client) => {
             }
         }
     }, 3000);
+    let counter = 0;
+    const status = [`${client.guilds.size} Guilds`, 'Tag me for Info', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} Users`, `${client.channels.size} Channels`];
     setInterval(changing_status, 12001);
     function changing_status() {
         counter++;
