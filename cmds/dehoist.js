@@ -6,7 +6,7 @@ module.exports.run = async (client, message) => {
     if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.reply('I need the permission `Manage Nicknames`');
     const msg = await channel.send(`${client.infos.loading} fetching members.`);
 
-    const hoisted = guild.members.filter(m => !new RegExp(/^([a-z]|[0-9])/, 'i').test(m.displayName));
+    const hoisted = guild.members.filter(m => m.displayName < '0');
     await msg.edit(`found ${hoisted.size} hoisted users.\nnow dehoisting ${client.infos.loading}`);
     let changed = 0;
     hoisted.forEach(element => {
