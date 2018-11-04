@@ -44,4 +44,8 @@ exports.help = {
     category: 'settings',
     example: 'settings',
     description: 'Shows the current settings of the Guild',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     const member = message.mentions.members.first();
-    if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('You don\'t have enough permissions to ban members');
-    if (!message.guild.me.permissions.has('BAN_MEMBERS')) return message.channel.send('I don\'t have enough permissions to ban members');
     if (!member) return message.channel.send('Please mention the member you want to ban');
     if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds yours.');
     if (!member.bannable) return message.channel.send('I can\'t ban that member');
@@ -29,4 +27,8 @@ exports.help = {
     category: 'moderation',
     example: 'ban @User <reason>',
     description: 'bans the User. Duhhh',
+    userPermissions: ['BAN_MEMBERS'],
+    userChannelPermissions: [],
+    myPermissions: ['BAN_MEMBERS'],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

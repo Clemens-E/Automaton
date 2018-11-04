@@ -31,4 +31,8 @@ exports.help = {
     category: 'others',
     example: 'poll 100 is this bot good?',
     description: 'creates a poll message where users can vote.',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES', 'ADD_REACTIONS'],
 };

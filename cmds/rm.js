@@ -1,7 +1,6 @@
 module.exports.run = async (client, message) => {
     const user = message.mentions.users.first();
     const amount = parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2]);
-    if (!message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')) return message.reply('I don\'t have enough permissions.');
     if (!amount) return message.reply('Must specify an amount to delete!');
     if (amount > 100) return message.reply('Must specify an amount below 100');
     if (!amount && !user) return message.reply('Must specify a user and amount, or just an amount, of messages to purge!');
@@ -22,4 +21,8 @@ exports.help = {
     category: 'moderation',
     example: 'rm [number] <tag>',
     description: 'deletes the amount of messages in the channel. Tag a User to only delete his messages',
+    userPermissions: [],
+    userChannelPermissions: ['MANAGE_MESSAGES'],
+    myPermissions: [],
+    myChannelPermissions: ['MANAGE_MESSAGES'],
 };

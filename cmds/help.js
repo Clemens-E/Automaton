@@ -70,4 +70,8 @@ exports.help = {
     category: 'others',
     example: 'help <specific command>',
     description: 'shows the help dialog',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES', 'ADD_REACTIONS'],
 };

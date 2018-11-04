@@ -9,4 +9,8 @@ exports.help = {
     category: 'others',
     example: 'ping',
     description: 'shows the ping',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

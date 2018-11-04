@@ -14,4 +14,8 @@ exports.help = {
     category: 'owner commands',
     example: 'premium',
     description: 'Adds a User to the premium Database',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

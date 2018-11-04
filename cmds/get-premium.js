@@ -18,4 +18,8 @@ exports.help = {
     category: 'premium',
     example: 'get-premium',
     description: 'makes the current Guild premium. Only works with Users listed in the Premium Database',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

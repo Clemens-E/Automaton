@@ -1,8 +1,4 @@
-const Discord = require('discord.js');
-const $console = require('Console');
 module.exports.run = async (client, message, args) => {
-    if (!message.guild.me.permissions.has('MANAGE_ROLES')) return message.channel.send(':x:\nI cant manage roles on this server!\nPlease make sure I can and then try again');
-    if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You cant');
     const mtoMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[1]);
     if (!mtoMute) return message.channel.send('You didnt mention!');
     if (mtoMute.highestRole.position >= message.member.highestRole.position) return message.channel.send('You cannot unmute a member, that is stronger than you!');
@@ -23,4 +19,8 @@ exports.help = {
     category: 'moderation',
     example: 'unmute @User',
     description: 'removing tmp mute from a member',
+    userPermissions: ['MANAGE_MESSAGES'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['MANAGE_ROLES', 'SEND_MESSAGES'],
 };

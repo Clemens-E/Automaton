@@ -17,4 +17,8 @@ exports.help = {
     category: 'owner commands',
     example: 'update',
     description: 'pulls from origin. restart if changes where made.',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

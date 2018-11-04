@@ -1,7 +1,7 @@
 const $console = require('Console');
 module.exports.run = async (client, message, args) => {
     if (!client.reactsave.has(message.guild.id)) {
-        $console.stress(`Database for ${message.guild.id}`);
+        $console.stress(`Database for ${message.guild.id} is missing`);
         return message.channel.send('Mistake with the Database! developer will get a notification.');
     }
     const guild = message.guild;
@@ -25,4 +25,8 @@ exports.help = {
     category: 'reaction role',
     example: 'deletemsg 492807630528577546',
     description: 'deletes a message ID from reaction role. active IDs can be seen in the command `settings reaction`',
+    userPermissions: ['MANAGE_GUILD', 'MANAGE_ROLES'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

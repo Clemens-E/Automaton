@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
-    if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');
@@ -11,9 +10,7 @@ module.exports.run = async (client, message, args) => {
         $console.error(`guild: ${guild.name}|${guild.id}\nreactsave: ${client.reactsave.has(guild.id)}\nsettings: ${client.settings.has(guild.id)}`);
         return;
     }
-    const userperm = message.member.permissions;
-    if (!userperm.has('MANAGE_ROLES')) return channel.send('You don\'t have enough permissions. You need\n`Manage Roles`\n');
-    const template = args[0].toLowerCase();
+    const template = (args[0]) ? args[0].toLowerCase() : args[0];
     const messages = [];
     const premium = client.settings.getProp(guild.id, 'premium');
     let roletoadd;
@@ -93,4 +90,8 @@ exports.help = {
     category: 'reaction role',
     example: 'add',
     description: 'Adding a role and a emoji to a template',
+    userPermissions: ['MANAGE_GUILD', 'MANAGE_ROLES'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

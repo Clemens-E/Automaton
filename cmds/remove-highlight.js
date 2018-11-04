@@ -2,7 +2,6 @@ const $console = require('Console');
 module.exports.run = async (client, message) => {
     const guild = message.guild;
     const channel = message.channel;
-    if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');
@@ -10,8 +9,6 @@ module.exports.run = async (client, message) => {
         $console.error(`guild: ${guild.name}|${guild.id}\nreactsave: ${client.reactsave.has(guild.id)}\nsettings: ${client.settings.has(guild.id)}`);
         return;
     }
-    const userperm = message.member.permissions;
-    if (!userperm.has('MANAGE_GUILD')) return channel.send('You don\'t have enough permissions. You need\n`Manage Guild`\n');
     const messages = [];
     let rmHighlight;
     messages.push(message);
@@ -48,4 +45,8 @@ exports.help = {
     category: 'highlight messages',
     example: 'remove-highlight',
     description: 'Calls a input for removing a word for message highlight',
+    userPermissions: ['MANAGE_GUILD'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

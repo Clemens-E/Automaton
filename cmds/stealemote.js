@@ -1,7 +1,4 @@
 module.exports.run = async (client, message, args) => {
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${message.channel}.`);
-    if (!message.member.hasPermission('MANAGE_EMOJIS')) return message.channel.send('You don\'t have enough permissions to manage emotes');
-    if (!message.guild.me.permissions.has('MANAGE_EMOJIS')) return message.channel.send('I don\'t have enough permissions to manage emotes');
     if (!args[0]) return message.channel.send('Please give in a url. See help for a example');
     if (!args[1]) return message.channel.send('Please give in a name after the url. See help for a example');
     message.guild.createEmoji(args[0], args[1])
@@ -14,4 +11,8 @@ exports.help = {
     category: 'others',
     example: 'stealemote https://cdn.discordapp.com/emojis/498513312569360387.gif?v=1 wow',
     description: 'adds the linked emoji to the guild. add a name behind the url',
+    userPermissions: ['MANAGE_EMOJIS'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['MANAGE_EMOJIS', 'USE_EXTERNAL_EMOJIS', 'SEND_MESSAGES'],
 };

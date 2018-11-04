@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
     const member = message.mentions.members.first();
-    if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('You don\'t have enough permissions to kick members');
-    if (!message.guild.me.permissions.has('KICK_MEMBERS')) return message.channel.send('I don\'t have enough permissions to kick members');
     if (!member) return message.channel.send('Please mention the member you want to kick');
     if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds yours.');
     if (!member.kickable) return message.channel.send('I can\'t kick that member');
@@ -28,4 +26,8 @@ exports.help = {
     category: 'moderation',
     example: 'kick @User',
     description: 'Kicks the mentioned User. Duhhh',
+    userPermissions: ['KICK_MEMBERS'],
+    userChannelPermissions: [],
+    myPermissions: ['KICK_MEMBERS'],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

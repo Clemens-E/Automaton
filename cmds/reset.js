@@ -1,6 +1,4 @@
 module.exports.run = async (client, message, args) => {
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${message.channel}. Please make sure I can and try again.`);
-    if ((!message.member.permissions.has(['MANAGE_GUILD', 'MANAGE_ROLES'])) && message.author.id !== client.config.ownerid) { return message.channel.send('You dont have enough permissions on that server\nYou need the permission `Manage Guild` and `Manage Roles`'); }
     if (!args[0]) args[0] = 'none';
     switch (args[0].toLowerCase()) {
         case 'normal':
@@ -22,4 +20,8 @@ exports.help = {
     category: 'settings',
     example: 'reset',
     description: 'deleting a database for this Guild',
+    userPermissions: ['MANAGE_ROLES', 'MANAGE_ROLES'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

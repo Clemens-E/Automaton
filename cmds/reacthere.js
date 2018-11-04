@@ -2,7 +2,6 @@ const $console = require('Console');
 module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${message.channel}. Please make sure I can and try again.`);
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');
@@ -10,8 +9,6 @@ module.exports.run = async (client, message, args) => {
         $console.error(`guild: ${guild.name}|${guild.id}\nreactsave: ${client.reactsave.has(guild.id)}\nsettings: ${client.settings.has(guild.id)}`);
         return;
     }
-    const userperm = message.member.permissions;
-    if (!userperm.has('MANAGE_ROLES')) return channel.send('You don\'t have enough permissions. You need\n`Manage Roles`\n');
     const template = (!args[0]) ? '' : args[0].toLowerCase();
     const premium = client.settings.getProp(guild.id, 'premium');
     let mtoadd;
@@ -64,4 +61,8 @@ exports.help = {
     category: 'reaction role',
     example: 'reacthere',
     description: 'Calls a input for adding a message for reaction role',
+    userPermissions: ['MANAGE_ROLES'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES', 'ADD_REACTIONS'],
 };

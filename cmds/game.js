@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${message.channel}. Please try another channel or ask the Admin`);
     if (!args[0]) return message.channel.send('Please give in a name.\nexample:`game Overwatch`');
     const game = args.join(' ');
     const members = message.guild.members.filter(p => (p.user.presence.game != null && p.user.presence.game.name.includes(game)));
@@ -10,7 +9,7 @@ module.exports.run = async (client, message, args) => {
         if (allmember.length < 1500) {
             allmember += m.toString();
         }
- else if (!full) {
+        else if (!full) {
             full = true;
             allmember += '\n and more';
         }
@@ -28,4 +27,8 @@ exports.help = {
     category: 'others',
     example: 'game Honor',
     description: 'searches for users that play that game',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

@@ -2,8 +2,6 @@ module.exports.run = async (client, message) => {
     const channel = message.channel;
     const guild = await message.guild.fetchMembers();
     if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
-    if (!message.member.hasPermission('MANAGE_NICKNAMES') && message.author.id !== client.config.ownerid) return message.reply('You need the permission `Manage Nicknames`');
-    if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.reply('I need the permission `Manage Nicknames`');
     const msg = await channel.send(`${client.infos.loading} fetching members.`);
 
     const hoisted = guild.members.filter(m => m.displayName < '0');
@@ -22,4 +20,8 @@ exports.help = {
     category: 'moderation',
     example: 'dehoist',
     description: 'scans the whole server. Every User with a hoisted name gets renamed',
+    userPermissions: ['MANAGE_NICKNAMES'],
+    userChannelPermissions: [],
+    myPermissions: ['MANAGE_NICKNAMES'],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

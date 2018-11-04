@@ -8,4 +8,8 @@ exports.help = {
     category: 'others',
     example: 'search how 2 make music bot',
     description: 'Just try it',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

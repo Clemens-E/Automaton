@@ -37,4 +37,8 @@ exports.help = {
     category: 'entertainment',
     example: 'rank',
     description: 'Shows your rank depending on your points. Also sends a link that shows all Users',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

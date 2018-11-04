@@ -34,4 +34,8 @@ exports.help = {
     category: 'others',
     example: 'botstats',
     description: 'shows infos about this Bot',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
-
     const member = message.mentions.members.first();
-    if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('You don\'t have enough permissions to warn members\nyou need: `kick members`');
     if (!member) return message.channel.send('Please mention the member you want to warn');
     if (!args[1]) return message.channel.send('Please send in a reason behind the mention');
     if (member.highestRole.position >= message.member.highestRole.position) return message.channel.send('The mentioned members highest role position equals or exceeds yours.');
@@ -44,4 +42,8 @@ exports.help = {
     category: 'moderation',
     example: 'warn @Member',
     description: 'warns a Member',
+    userPermissions: ['KICK_MEMBERS'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 const Discord = require('discord.js');
 module.exports.run = async (client, message) => {
     // API Down
@@ -26,4 +27,8 @@ exports.help = {
     category: 'moderation',
     example: 'scan',
     description: 'scans the whole server. Every User banned on DBANS will get showed',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

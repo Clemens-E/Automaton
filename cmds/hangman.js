@@ -13,7 +13,6 @@ module.exports.run = async (client, message) => {
     const guild = message.guild;
     const channel = message.channel;
     const member = message.member;
-    if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');
@@ -66,4 +65,8 @@ exports.help = {
     category: 'entertainment',
     example: 'hangman',
     description: 'lets you play the classic hangman game',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

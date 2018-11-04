@@ -10,4 +10,8 @@ exports.help = {
     category: 'owner commands',
     example: 'restart',
     description: 'Stops the process. Hopefully pm2 restarts it',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: [],
 };

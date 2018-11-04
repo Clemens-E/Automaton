@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message, args) => {
-    if (!message.guild.me.permissions.has('MANAGE_ROLES')) return message.channel.send(':x:\nI cant manage roles on this server!\nPlease make sure I can and then try again');
-    if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You cant');
     const ftoMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[1]);
     if (!ftoMute) return message.channel.send('You didnt mention!');
     if (ftoMute.id === message.author.id) return message.channel.send('Please dont mute yourself');
@@ -65,4 +63,8 @@ exports.help = {
     category: 'moderation',
     example: 'tmpmute @User m 10',
     description: 'Mutes a User for a given time',
+    userPermissions: ['MANAGE_MESSAGES'],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['MANAGE_ROLES', 'SEND_MESSAGES'],
 };

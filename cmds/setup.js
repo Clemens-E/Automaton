@@ -3,8 +3,6 @@ const $console = require('Console');
 module.exports.run = async (client, message, args) => {
     const guild = message.guild;
     const channel = message.channel;
-    if (!channel.permissionsFor(guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${channel}. Please make sure I can and try again.`);
-    if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== client.config.ownerid) return message.reply('You need the permission `Manage Guild`');
     if (!client.reactsave.has(guild.id) || !client.settings.has(guild.id)) {
         message.author.send(':x: Something unexpected happened\nThe developer got a notification');
         channel.send(':x: Something unexpected happened\nThe developer got a notification');
@@ -59,4 +57,8 @@ exports.help = {
     category: 'settings',
     example: 'setup',
     description: 'for changing the settings',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

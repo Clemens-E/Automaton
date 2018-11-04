@@ -1,10 +1,9 @@
+/* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 const snekfetch = require('snekfetch');
 const child = require('child_process');
 module.exports.run = async (client, message, args) => {
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
     if (message.author.id !== client.config.ownerid) return;
-    // for later use in the evaled code
     const channel = message.channel;
     const guild = message.guild;
     try {
@@ -41,4 +40,8 @@ exports.help = {
     category: 'owner commands',
     example: 'e client.token',
     description: 'runs js code',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };

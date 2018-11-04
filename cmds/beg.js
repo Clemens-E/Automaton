@@ -1,6 +1,6 @@
+/* eslint-disable no-undef */
 const random = require('random');
 module.exports.run = async (client, message) => {
-    if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`I can't send messages in ${message.channel}.`);
     await client.userp.fetch(message.author.id);
     if (!client.userp.has(message.author.id)) {
         const normal = {
@@ -23,4 +23,8 @@ exports.help = {
     category: 'entertainment',
     example: 'beg',
     description: 'If you don\'t have much points the bot will give you some',
+    userPermissions: [],
+    userChannelPermissions: [],
+    myPermissions: [],
+    myChannelPermissions: ['SEND_MESSAGES'],
 };
