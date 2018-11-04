@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const modified = require('./struct/extend.js');
 const client = new modified();
 const fs = require('fs');
@@ -19,10 +18,6 @@ client.userp = new Enmap({
 
 process.on('unhandledRejection', error => {
     $console.error(error.stack);
-    if (client.ready) {
-        const channel = client.channels.get(client.infos.promise_rejections_channel);
-        channel.send(new Discord.RichEmbed().setDescription(error.stack).setTitle(error.message).setColor(client.infos.ce).setTimestamp()).catch((O_o) => O_o);
-    }
 });
 
 antispam(client);
@@ -30,9 +25,10 @@ fs.readdir('./events/', (err, files) => {
     let eventssize = 0;
     if (err) return $console.error(err);
     files.forEach(file => {
-        eventssize++;
+        if (!file.endsWith('.js')) return;
         const event = require(`./events/${file}`);
         const eventName = file.split('.')[0];
+        eventssize++;
         client.on(eventName, event.bind(null, client));
     });
     $console.success(`loaded ${eventssize} events`);
@@ -40,16 +36,14 @@ fs.readdir('./events/', (err, files) => {
 
 client.commands = new Enmap();
 fs.readdir('./cmds/', (err, files) => {
-    let cmds = 0;
     if (err) return console.error(err);
     files.forEach(file => {
         if (!file.endsWith('.js')) return;
         const props = require(`./cmds/${file}`);
         const commandName = file.split('.')[0];
-        cmds++;
         client.commands.set(commandName, props);
     });
-    $console.success(`loaded ${cmds} commands`);
+    $console.success(`loaded ${client.commands.size} commands`);
 });
 
 client.login(client.config.token);
