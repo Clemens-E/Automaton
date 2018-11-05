@@ -29,7 +29,6 @@
     "os-utils": "0.0.14",
     "random": "^2.0.12",
     "random-words": "^1.1.0",
-    "sleep": "^5.2.3",
     "snekfetch": "^4.0.4"
   }
 }
