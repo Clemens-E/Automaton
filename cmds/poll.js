@@ -8,20 +8,26 @@ module.exports.run = async (client, message, args) => {
     }
     args.shift();
     const content = args.join(' ');
-    if (content.length > 255) return message.channel.send(`Please provide a topic with less than 255 characters (your message had ${message.content.size} characters)`);
+    if (content.length > 255) return message.channel.send(`Please provide a topic with less than 255 characters (your message had ${message.content.length} characters)`);
     if (!timeout) return message.channel.send('Please send a valid number after the command for time');
     const msg = await message.channel.send(new Discord.RichEmbed()
-        .setTitle(args.join(' '))
+        .setTitle(content)
         .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${timeout / 1000} Seconds time to react`)
-        .setTimestamp());
+        .setTimestamp())
+        .setColor(client.infos.ci);
     await msg.react('👍');
     await msg.react('👎');
     const filter = (reaction, user) => (reaction.emoji.name === '👎' || reaction.emoji.name === '👍') && !user.bot;
     msg.awaitReactions(filter, { time: timeout }).then(c => {
         const down = c.filter(r => r.emoji.name === '👎').size;
         const up = c.filter(r => r.emoji.name === '👍').size;
-        message.channel.send(`Topic: ${content}\nUpvotes: ${up}\nDownvotes: ${down}`);
+        message.channel.send(new Discord.RichEmbed()
+            .setTitle(content)
+            .setAuthor(message.author.username, message.author.avatarURL)
+            .addField(`Upvotes ${up}`)
+            .addField(`Downvotes ${down}`)
+            .setColor((down > up) ? client.infos.cs : client.infos.ce));
     });
 
 };
