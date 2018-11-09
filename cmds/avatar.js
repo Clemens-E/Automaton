@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args) => {
     if (!member) message.channel.send(`I can't find a member named ${args.join('')}`);
     const embed = new Discord.RichEmbed()
         .setTitle(member.user.username + '\' avatar')
-        .setImage(member.user.avatarURL)
+        .setImage(member.user.displayAvatarURL)
         .setColor(client.infos.ci);
     message.channel.send({
         embed,
