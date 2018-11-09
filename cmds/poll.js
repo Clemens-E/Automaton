@@ -17,12 +17,12 @@ module.exports.run = async (client, message, args) => {
         .setTimestamp());
     await msg.react('👍');
     await msg.react('👎');
-    const filter = (reaction) => reaction.emoji.name === '👎' || reaction.emoji.name === '👍';
-    setTimeout(() => msg.awaitReactions(filter, { time: timeout }).then(c => {
+    const filter = (reaction, user) => (reaction.emoji.name === '👎' || reaction.emoji.name === '👍') && !user.bot;
+    msg.awaitReactions(filter, { time: timeout }).then(c => {
         const down = c.filter(r => r.emoji.name === '👎').size;
         const up = c.filter(r => r.emoji.name === '👍').size;
         message.channel.send(`Topic: ${content}\nUpvotes: ${up}\nDownvotes: ${down}`);
-    }), 2000);
+    });
 
 };
 
