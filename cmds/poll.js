@@ -14,8 +14,8 @@ module.exports.run = async (client, message, args) => {
         .setTitle(content)
         .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${timeout / 1000} Seconds time to react`)
-        .setTimestamp())
-        .setColor(client.infos.ci);
+        .setTimestamp()
+        .setColor(client.infos.ci));
     await msg.react('👍');
     await msg.react('👎');
     const filter = (reaction, user) => (reaction.emoji.name === '👎' || reaction.emoji.name === '👍') && !user.bot;
