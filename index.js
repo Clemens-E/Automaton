@@ -36,7 +36,7 @@ fs.readdir('./events/', (err, files) => {
 
 client.commands = new Enmap();
 fs.readdir('./cmds/', (err, files) => {
-    if (err) return console.error(err);
+    if (err) return $console.error(err);
     files.forEach(file => {
         if (!file.endsWith('.js')) return;
         const props = require(`./cmds/${file}`);
