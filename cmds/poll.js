@@ -25,9 +25,9 @@ module.exports.run = async (client, message, args) => {
         message.channel.send(new Discord.RichEmbed()
             .setTitle(content)
             .setAuthor(message.author.username, message.author.avatarURL)
-            .addField(`Upvotes ${up}`)
-            .addField(`Downvotes ${down}`)
-            .setColor((down > up) ? client.infos.cs : client.infos.ce));
+            .addField('Upvotes:', up)
+            .addField('Downvotes:', down)
+            .setColor((down > up) ? client.infos.ce : client.infos.cs));
     });
 
 };
