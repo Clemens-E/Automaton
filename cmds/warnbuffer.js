@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args) => {
 
 exports.help = {
     name: 'warnbuffer',
-    category: 'moderation',
+    category: 'settings',
     example: 'warnbuffer 5',
     description: 'Sets the maximal messages for antispam until warning',
     userPermissions: ['MANAGE_GUILD'],
