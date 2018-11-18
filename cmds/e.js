@@ -9,10 +9,9 @@ module.exports.run = async (client, message, args) => {
     try {
         const code = args.join(' ');
         let evaled = eval(code);
-        if (typeof evaled !== 'string') { evaled = require('util').inspect(evaled); }
-        evaled = evaled.replace(client.token, '"No"');
+        evaled = await clean(evaled);
         if (evaled.length < 2000) {
-            message.channel.send(clean(evaled), {
+            message.channel.send(evaled, {
                 code: 'xl',
             });
         }
@@ -29,12 +28,20 @@ module.exports.run = async (client, message, args) => {
         message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
 };
+async function clean(client, text)
+{
+if (text && text.constructor.name == "Promise")
+      text = await text;
+    if (typeof evaled !== "string")
+      text = require("util").inspect(text, {depth: 0});
 
-function clean(text) {
-    if (typeof (text) === 'string') { return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203)); }
-    else { return text; }
+    text = text
+      .replace(/`/g, "`" + String.fromCharCode(8203))
+      .replace(/@/g, "@" + String.fromCharCode(8203))
+      .replace(client.token, "this is libary");
+
+    return text;
 }
-
 exports.help = {
     name: 'eval',
     category: 'owner commands',
