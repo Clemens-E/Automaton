@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
     try {
         const code = args.join(' ');
         let evaled = eval(code);
-        evaled = await clean(evaled);
+        evaled = await clean(client, evaled);
         if (evaled.length < 2000) {
             message.channel.send(evaled, {
                 code: 'xl',
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args) => {
     }
     catch (err) {
         if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
-        message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+        message.channel.send(`\`ERROR\` \`\`\`xl\n${await clean(client, err)}\n\`\`\``);
     }
 };
 async function clean(client, text)
