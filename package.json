@@ -12,6 +12,7 @@
   "author": "Clemens Ertle",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^4.3.2",
     "Console": "^1.1.0",
     "bufferutil": "^4.0.0",
     "chart-constructor": "^0.7.4",
