@@ -17,7 +17,7 @@ exports.help = {
     category: 'entertainment',
     example: 'balance',
     description: 'Shows your current balance',
-    userPermissions: ['MANAGE_GUILD', 'MANAGE_ROLES'],
+    userPermissions: [],
     userChannelPermissions: [],
     myPermissions: [],
     myChannelPermissions: ['SEND_MESSAGES'],
