@@ -20,13 +20,13 @@ module.exports.run = async (client, message, args) => {
     await msg.react('👎');
     const filter = (reaction, user) => (reaction.emoji.name === '👎' || reaction.emoji.name === '👍') && !user.bot;
     msg.awaitReactions(filter, { time: timeout }).then(c => {
-        const down = c.filter(r => r.emoji.name === '👎').size;
-        const up = c.filter(r => r.emoji.name === '👍').size;
+        const down = c.find(r => r.emoji.name === '👎');
+        const up = c.find(r => r.emoji.name === '👍');
         message.channel.send(new Discord.RichEmbed()
             .setTitle(content)
             .setAuthor(message.author.username, message.author.avatarURL)
-            .addField('Upvotes:', up)
-            .addField('Downvotes:', down)
+            .addField('Upvotes:', (up) ? up.count - 1 : 0)
+            .addField('Downvotes:', (down) ? down.count - 1 : 0)
             .setColor((down > up) ? client.infos.ce : client.infos.cs));
     });
 
