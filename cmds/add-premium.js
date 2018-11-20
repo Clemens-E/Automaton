@@ -10,9 +10,9 @@ module.exports.run = async (client, message, args) => {
 };
 
 exports.help = {
-    name: 'premium',
+    name: 'add-premium',
     category: 'owner commands',
-    example: 'premium',
+    example: 'add-premium 196214245770133504',
     description: 'Adds a User to the premium Database',
     userPermissions: [],
     userChannelPermissions: [],
