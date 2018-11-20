@@ -13,8 +13,9 @@ module.exports.run = async (client, message) => {
         2: cmds.filter(m => m.category === 'reaction role'),
         3: cmds.filter(m => m.category === 'highlight messages'),
         4: cmds.filter(m => m.category === 'entertainment'),
-        5: cmds.filter(m => m.category === 'others'),
-        6: cmds.filter(m => m.category === 'owner commands'),
+        5: cmds.filter(m => m.category === 'premium'),
+        6: cmds.filter(m => m.category === 'others'),
+        7: cmds.filter(m => m.category === 'owner commands'),
     };
     let topicPage = 0;
     let cmdPage = 0;
@@ -77,7 +78,7 @@ example: \`${comds[topicPage][cmdPage].example}\``).setTitle(`Category: ${comds[
 exports.help = {
     name: 'help',
     category: 'others',
-    example: 'help <specific command>',
+    example: 'help',
     description: 'shows the help dialog',
     userPermissions: [],
     userChannelPermissions: [],
