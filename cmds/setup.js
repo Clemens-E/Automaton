@@ -57,7 +57,7 @@ exports.help = {
     category: 'settings',
     example: 'setup',
     description: 'for changing the settings',
-    userPermissions: [],
+    userPermissions: ['MANAGE_GUILD', 'MANAGE_GUILD'],
     userChannelPermissions: [],
     myPermissions: [],
     myChannelPermissions: ['SEND_MESSAGES'],
