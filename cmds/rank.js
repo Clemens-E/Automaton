@@ -16,6 +16,7 @@ module.exports.run = async (client, message) => {
     let format = [
         ['Rank', 'ID', 'Name', 'Points'],
     ];
+    await Promise.all(array.map(u => client.fetchUser(u[0])));
     for (let i = 0; i < array.length; i++) {
         format.push([]);
         format[i + 1].push(i + 1, array[i][0], client.users.get(array[i][0]).tag, array[i][1].points);
