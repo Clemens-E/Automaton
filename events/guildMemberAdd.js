@@ -14,8 +14,8 @@ module.exports = async (client, member) => {
             const premade = ['Hello {user}, we waited for you!', 'Hey {user}, welcome to {guild}', '{user} arrived O_o', '{user} is here, as the prophecy foretold.', '{user} is here to kick butt and chew bubblegum. And {user} is all out of gum.'];
             wmsg = premade[Math.floor(Math.random() * premade.length)];
         }
-        wmsg = wmsg.replace('{user}', member.toString());
-        wmsg = wmsg.replace('{guild}', member.guild.name);
+        wmsg = wmsg.replace(/{guild}/g, member.toString());
+        wmsg = wmsg.replace(/{guild}/g, member.guild.name);
         greetchannel.send(wmsg);
     }
     if (client.settings.getProp(member.guild.id, 'invite_del')) {
