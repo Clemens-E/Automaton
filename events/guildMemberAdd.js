@@ -14,7 +14,7 @@ module.exports = async (client, member) => {
             const premade = ['Hello {user}, we waited for you!', 'Hey {user}, welcome to {guild}', '{user} arrived O_o', '{user} is here, as the prophecy foretold.', '{user} is here to kick butt and chew bubblegum. And {user} is all out of gum.'];
             wmsg = premade[Math.floor(Math.random() * premade.length)];
         }
-        wmsg = wmsg.replace(/{guild}/g, member.toString());
+        wmsg = wmsg.replace(/{user}/g, member.toString());
         wmsg = wmsg.replace(/{guild}/g, member.guild.name);
         greetchannel.send(wmsg);
     }
@@ -39,14 +39,12 @@ module.exports = async (client, member) => {
                     .setColor(3127860)
                     .setDescription(`banned ${member} because he is listed on DBANS\nReason: ${search.reason}\n[Proof](${search.proof})`));
             }
-        }
-        else if (logchannel) {
+        } else if (logchannel) {
             logchannel.send(new Discord.RichEmbed()
                 .setColor(13908020)
                 .setDescription(`tried to ban ${member} because he is listed on DBANS\nReason: ${search.reason}\n[Proof](${search.proof})\nSadly I can't ban him`));
         }
-    }
-    else {
+    } else {
         if (greetchannel) greetchannel.send(`${member} is reported on DBANS, be careful!\nReason: ${search.reason}`);
         if (logchannel) {
             logchannel.send(new Discord.RichEmbed()
