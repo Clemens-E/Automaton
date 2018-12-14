@@ -29,7 +29,7 @@ module.exports.run = async (client, message) => {
     const embed = new Discord.RichEmbed()
         .setTitle('Help Text')
         .setDescription('React with ▶ to see the next command.\nReact with ⏩ to skip to the next category')
-        .addField('All Commands', `[all commands in one list.](https://paste.discord.land/${link.body.key})\n[Documentation](https://clemens.gitbook.io/automaton)`)
+        .addField('All Commands', `[all commands in one list](https://paste.discord.land/${link.body.key})\n[Documentation](https://clemens.gitbook.io/automaton)\n[Support Server](https://discord.gg/FFeAfZ9)`)
         .setColor(client.infos.cn);
     const msg = await message.channel.send(embed);
     setTimeout(() => {
@@ -53,18 +53,22 @@ module.exports.run = async (client, message) => {
         switch (r.emoji.name) {
             case '⏩':
                 if (topicPage === Object.keys(comds).length - 1) return;
-                topicPage++; cmdPage = 0;
+                topicPage++;
+                cmdPage = 0;
                 break;
             case '⏪':
                 if (topicPage <= 0) return;
-                topicPage--; cmdPage = 0;
+                topicPage--;
+                cmdPage = 0;
                 break;
             case '▶':
                 if (cmdPage === comds[topicPage].length - 1) return;
-                cmdPage++; break;
+                cmdPage++;
+                break;
             case '◀':
                 if (cmdPage <= 0) return;
-                cmdPage--; break;
+                cmdPage--;
+                break;
         }
         msg.edit(new Discord.RichEmbed(msg.embeds[0])
             .setDescription(`Name: ${comds[topicPage][cmdPage].name}
