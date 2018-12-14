@@ -5,12 +5,14 @@ module.exports.run = async (client, message, args) => {
     const members = message.guild.members.filter(p => (p.user.presence.game != null && p.user.presence.game.name.includes(game)));
     let allmember = '';
     let full = false;
+    let count = members.size;
     members.forEach(m => {
-        if (allmember.length < 1500) {
+        if (allmember.length < 500) {
             allmember += m.toString() + '\n';
+            count--;
         } else if (!full) {
             full = true;
-            allmember += '\n and more';
+            allmember += `\n and ${count} more`;
         }
     });
     message.channel.send(
