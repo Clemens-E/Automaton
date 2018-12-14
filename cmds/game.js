@@ -7,18 +7,17 @@ module.exports.run = async (client, message, args) => {
     let full = false;
     members.forEach(m => {
         if (allmember.length < 1500) {
-            allmember += m.toString();
-        }
-        else if (!full) {
+            allmember += m.toString() + '\n';
+        } else if (!full) {
             full = true;
             allmember += '\n and more';
         }
     });
     message.channel.send(
         new Discord.RichEmbed()
-            .setColor(40863)
-            .setTitle(`Users playing games with names including "${game}":`)
-            .setDescription(`${(members.size == 0) ? 'No User plays that game.' : `${allmember}`}`));
+        .setColor(40863)
+        .setTitle(`Users playing games with names including "${game}":`)
+        .setDescription(`${(members.size == 0) ? 'No User plays that game.' : `${allmember}`}`));
 
 };
 
