@@ -33,7 +33,7 @@ module.exports = async (client, guild) => {
     possiblechannels.last().send(new Discord.RichEmbed()
         .setColor(3127860)
         .addField('*Hello! Iam Automaton*', 'Thanks for adding me to your server!')
-        .addField('Find help:', '[Full Documentation](https://automaton.gitbook.io/automaton/ "Official Docs")', true)
+        .addField('Find help:', '[Full Documentation](https://clemens.gitbook.io/automaton "Official Docs")', true)
         .addField('Prefix', 'My default prefix is `>`. If you ever forget it,\njust ping me in the beginning of the message and I will tell you!')
         .setFooter(`This is the ${client.guilds.size} Guild I joined.`));
 
