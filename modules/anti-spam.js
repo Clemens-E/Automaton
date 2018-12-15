@@ -10,6 +10,8 @@ module.exports = function (client) {
 
     client.on('message', msg => {
         if (msg.author.bot) return;
+        if (message.channel.type == 'dm') return;
+        a
         if (msg.attachments.size > 0) return;
         if (!client.settings.has(msg.guild.id)) return;
         if (!client.settings.getProp(msg.guild.id, 'antispam')) return;
@@ -69,8 +71,7 @@ module.exports = function (client) {
                 if (matched === maxBuffer && !banned.includes(msg.author.id)) {
                     ban(msg);
                 }
-            }
-            else if (authors[i].time < now - interval) {
+            } else if (authors[i].time < now - interval) {
                 authors.splice(i);
                 warned.splice(warned.indexOf(authors[i]));
                 banned.splice(warned.indexOf(authors[i]));
