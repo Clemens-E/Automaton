@@ -10,8 +10,7 @@ module.exports = function (client) {
 
     client.on('message', msg => {
         if (msg.author.bot) return;
-        if (message.channel.type == 'dm') return;
-        a
+        if (msg.channel.type == 'dm') return;
         if (msg.attachments.size > 0) return;
         if (!client.settings.has(msg.guild.id)) return;
         if (!client.settings.getProp(msg.guild.id, 'antispam')) return;
