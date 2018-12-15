@@ -6,9 +6,9 @@ module.exports = async (client, guild) => {
     if (bcount > 10 && mcount < bcount) {
         guild.owner.send(`Hey, your guild has ${bcount} Bots and only ${mcount} Member. I dont like that, I will leave`).catch((O_o) => O_o);
         guild.leave();
-        client.channels.get('461211772804792320').send(new Discord.RichEmbed().setDescription(`Leaved Guild ${guild.name} with ${mcount} members and ${bcount} bots.\nReason: more bots than users`).setColor(8135099));
+        client.channels.get('461211772804792320').send(new Discord.RichEmbed().setDescription(`Left Guild ${guild.name} with ${mcount} members and ${bcount} bots.\nReason: more bots than users`).setColor(8135099));
         client.leavedMyself = true;
-        $console.stress(`Leaved Guild ${guild.name} with ${mcount} members and ${bcount} bots.\nReason: more bots than users`);
+        $console.stress(`Left Guild ${guild.name} with ${mcount} members and ${bcount} bots.\nReason: more bots than users`);
         const possiblechannels = guild.channels.filter((c) => c.permissionsFor(guild.me).has('SEND_MESSAGES') && c.type === 'text');
         if (possiblechannels.size === 0) return;
         possiblechannels.sort((c1, c2) => c1.position - c2.position);
