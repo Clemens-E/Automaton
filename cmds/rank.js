@@ -23,13 +23,15 @@ module.exports.run = async (client, message) => {
     }
     format = table(format);
     if (format.length > 400000) format.splice(399999, 400000);
-    const link = await snekfetch.post('https://paste.discord.land/documents').send(format);
+    const link = await snekfetch.post('https://txtupload.cf/api/upload').send({
+        'text': format,
+    });
     message.channel.send(new Discord.RichEmbed()
         .setColor(40863)
         .setTitle(`See ${message.author.tag}'s rank`)
         .addField('**-------------------**', '** **')
         .addField(`current rank: ${urank}`, '** **')
-        .addField('**-------------------**', `**[all ranks](https://paste.discord.land/${link.body.key})**`));
+        .addField('**-------------------**', `**[all ranks](https://txtupload.cf/${link.body.hash}#${link.body.key})**`));
 
 };
 

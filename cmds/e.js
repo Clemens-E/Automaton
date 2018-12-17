@@ -14,31 +14,32 @@ module.exports.run = async (client, message, args) => {
             message.channel.send(evaled, {
                 code: 'xl',
             });
-        }
-        else {
-            snekfetch.post('https://paste.discord.land/documents').send(evaled).then(body => {
+        } else {
+            snekfetch.post('https://txtupload.cf/api/upload').send({
+                'text': evaled,
+            }).then(body => {
                 message.channel.send(new Discord.RichEmbed()
                     .setColor(3138560)
-                    .addField('Uploaded Text', ':white_check_mark: Posted text to Hastebin! URL: https://paste.discord.land/' + body.body.key));
+                    .addField('Uploaded Text', `:white_check_mark: [txtupload.cf](https://txtupload.cf/${body.body.hash}#${body.body.key})`));
             });
         }
-    }
-    catch (err) {
+    } catch (err) {
         if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
         message.channel.send(`\`ERROR\` \`\`\`xl\n${await clean(client, err)}\n\`\`\``);
     }
 };
-async function clean(client, text)
-{
-if (text && text.constructor.name == "Promise")
-      text = await text;
+async function clean(client, text) {
+    if (text && text.constructor.name == "Promise")
+        text = await text;
     if (typeof evaled !== "string")
-      text = require("util").inspect(text, {depth: 0});
+        text = require("util").inspect(text, {
+            depth: 0
+        });
 
     text = text
-      .replace(/`/g, "`" + String.fromCharCode(8203))
-      .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.token, "this is libary");
+        .replace(/`/g, "`" + String.fromCharCode(8203))
+        .replace(/@/g, "@" + String.fromCharCode(8203))
+        .replace(client.token, "this is libary");
 
     return text;
 }

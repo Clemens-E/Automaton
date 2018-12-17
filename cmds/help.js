@@ -19,17 +19,19 @@ module.exports.run = async (client, message) => {
     };
     let topicPage = 0;
     let cmdPage = 0;
-    let hastebintxt = '';
+    let pastetxt = '';
     Object.keys(comds).map(k => {
         const r = comds[k];
-        hastebintxt += `\n\nCategory: ${r[Object.keys(r)[0]].category}\n`;
-        r.map(d => hastebintxt += `Name: ${d.name}\ndescription: ${d.description}\nexample: ${d.example}\n\n`);
+        pastetxt += `\n\nCategory: ${r[Object.keys(r)[0]].category}\n`;
+        r.map(d => pastetxt += `Name: ${d.name}\ndescription: ${d.description}\nexample: ${d.example}\n\n`);
     });
-    const link = await snekfetch.post('https://paste.discord.land/documents').send(hastebintxt);
+    const link = await snekfetch.post('https://txtupload.cf/api/upload').send({
+        'text': pastetxt,
+    })
     const embed = new Discord.RichEmbed()
         .setTitle('Help Text')
         .setDescription('React with ▶ to see the next command.\nReact with ⏩ to skip to the next category')
-        .addField('All Commands', `[all commands in one list](https://paste.discord.land/${link.body.key})\n[Documentation](https://clemens.gitbook.io/automaton)\n[Support Server](https://discord.gg/FFeAfZ9)`)
+        .addField('All Commands', `[all commands in one list](https://txtupload.cf/${link.body.hash}#${link.body.key})\n[Documentation](https://clemens.gitbook.io/automaton)\n[Support Server](https://discord.gg/FFeAfZ9)`)
         .setColor(client.infos.cn);
     const msg = await message.channel.send(embed);
     setTimeout(() => {
