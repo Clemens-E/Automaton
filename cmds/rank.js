@@ -5,7 +5,7 @@ module.exports.run = async (client, message) => {
     await client.userp.fetchEverything();
 
     let array = [...client.userp];
-    array = array.sort((a, b) => a[1].points + b[1].points);
+    array = array.sort((a, b) => b[1].points - a[1].points );
     let urank = 'not ranked';
     for (let i = 0; i < array.length; i++) {
         if (array[i].indexOf(message.author.id) == 0) {
