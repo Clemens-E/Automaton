@@ -14,16 +14,11 @@ client.userp = new Enmap({
     name: 'userpoints',
     fetchAll: false,
 });
-const Sentry = require('@sentry/node');
-Sentry.init({ dsn: client.config.errorlogging });
 process.on('unhandledRejection', error => {
     $console.error(error.stack);
-    // catch js necessary because if sentry rejects it will create a infitite loop.
-    Sentry.captureException(error.stack).catch(err => $console.error(err));
 });
 process.on('uncaughtException', error => {
     $console.error(error.stack);
-    Sentry.captureException(error.stack).catch(err => $console.error(err));
     process.exit(1);
 });
 antispam(client);
