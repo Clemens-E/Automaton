@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const fetch = require('node-fetch');
 const table = require('markdown-table');
 module.exports.run = async (client, message) => {
     await client.userp.fetchEverything();
 
     let array = [...client.userp];
-    array = array.sort((a, b) => b[1].points - a[1].points );
+    array = array.sort((a, b) => b[1].points - a[1].points);
     let urank = 'not ranked';
     for (let i = 0; i < array.length; i++) {
         if (array[i].indexOf(message.author.id) == 0) {
@@ -23,15 +23,20 @@ module.exports.run = async (client, message) => {
     }
     format = table(format);
     if (format.length > 400000) format.splice(399999, 400000);
-    const link = await snekfetch.post('https://txtupload.cf/api/upload').send({
-        'text': format,
+    let link = await fetch('https://txtupload.cf/api/upload', {
+        method: 'post',
+        body: format,
+        headers: {
+            'Content-Type': 'text/plain',
+        },
     });
+    link = await link.json();
     message.channel.send(new Discord.RichEmbed()
         .setColor(40863)
         .setTitle(`See ${message.author.tag}'s rank`)
         .addField('**-------------------**', '** **')
         .addField(`current rank: ${urank}`, '** **')
-        .addField('**-------------------**', `**[all ranks](https://txtupload.cf/${link.body.hash}#${link.body.key})**`));
+        .addField('**-------------------**', `**[all ranks](https://txtupload.cf/${link.hash}#${link.key})**`));
 
 };
 

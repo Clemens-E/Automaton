@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const fetch = require('node-fetch');
 const child = require('child_process');
 module.exports.run = async (client, message, args) => {
     if (message.author.id !== client.config.ownerid) return;
@@ -11,35 +11,40 @@ module.exports.run = async (client, message, args) => {
         let evaled = eval(code);
         evaled = await clean(client, evaled);
         if (evaled.length < 2000) {
-            message.channel.send(evaled, {
+            channel.send(evaled, {
                 code: 'xl',
             });
         } else {
-            snekfetch.post('https://txtupload.cf/api/upload').send({
-                'text': evaled,
-            }).then(body => {
-                message.channel.send(new Discord.RichEmbed()
-                    .setColor(3138560)
-                    .addField('Uploaded Text', `:white_check_mark: [txtupload.cf](https://txtupload.cf/${body.body.hash}#${body.body.key})`));
-            });
+            fetch('https://txtupload.cf/api/upload', {
+                    method: 'post',
+                    body: evaled,
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                }).then(res => res.json())
+                .then(r =>
+                    channel.send(new Discord.RichEmbed()
+                        .setColor(3138560)
+                        .addField('Uploaded Text', `:white_check_mark: [txtupload.cf](https://txtupload.cf/${r.hash}#${r.key})`)));
         }
     } catch (err) {
-        if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
         message.channel.send(`\`ERROR\` \`\`\`xl\n${await clean(client, err)}\n\`\`\``);
     }
 };
 async function clean(client, text) {
-    if (text && text.constructor.name == "Promise")
+    if (text && text.constructor.name == 'Promise') {
         text = await text;
-    if (typeof evaled !== "string")
+    }
+    if (typeof evaled !== 'string') {
         text = require("util").inspect(text, {
             depth: 0
         });
+    }
 
     text = text
-        .replace(/`/g, "`" + String.fromCharCode(8203))
-        .replace(/@/g, "@" + String.fromCharCode(8203))
-        .replace(client.token, "this is libary");
+        .replace(/`/g, '`' + String.fromCharCode(8203))
+        .replace(/@/g, '@' + String.fromCharCode(8203))
+        .replace(client.token, 'this is libary');
 
     return text;
 }

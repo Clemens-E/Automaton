@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const fetch = require('node-fetch');
 module.exports.run = async (client, message) => {
     if (!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
     const emojis = ['⏩', '⏪', '▶', '◀'];
@@ -25,13 +25,18 @@ module.exports.run = async (client, message) => {
         pastetxt += `\n\nCategory: ${r[Object.keys(r)[0]].category}\n`;
         r.map(d => pastetxt += `Name: ${d.name}\ndescription: ${d.description}\nexample: ${d.example}\n\n`);
     });
-    const link = await snekfetch.post('https://txtupload.cf/api/upload').send({
-        'text': pastetxt,
-    })
+    let link = await fetch('https://txtupload.cf/api/upload', {
+        method: 'post',
+        body: pastetxt,
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+    });
+    link = await link.json();
     const embed = new Discord.RichEmbed()
         .setTitle('Help Text')
         .setDescription('React with ▶ to see the next command.\nReact with ⏩ to skip to the next category')
-        .addField('All Commands', `[all commands in one list](https://txtupload.cf/${link.body.hash}#${link.body.key})\n[Documentation](https://clemens.gitbook.io/automaton)\n[Support Server](https://discord.gg/FFeAfZ9)`)
+        .addField('All Commands', `[all commands in one list](https://txtupload.cf/${link.hash}#${link.key})\n[Documentation](https://clemens.gitbook.io/automaton)\n[Support Server](https://discord.gg/FFeAfZ9)`)
         .setColor(client.infos.cn);
     const msg = await message.channel.send(embed);
     setTimeout(() => {
