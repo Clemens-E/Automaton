@@ -5,6 +5,7 @@ const $console = require('Console');
 const Enmap = require('enmap');
 const antispam = require('./modules/anti-spam.js');
 const Lookup = require('./modules/lookup.js').Lookup;
+const http = require('http');
 $console.success(`Process started at ${new Date(Date.now())}`);
 client.config = require('./config.json');
 client.infos = require('./infos.json');
@@ -47,4 +48,12 @@ fs.readdir('./cmds/', (err, files) => {
     $console.success(`loaded ${client.commands.size} commands`);
 });
 
+// Listen on http requests for uptime robot
 client.login(client.config.token);
+http.createServer((req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/html',
+    });
+    res.write('Beep Beep Boop I work');
+    res.end();
+}).listen(3000);
