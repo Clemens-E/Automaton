@@ -45,14 +45,13 @@ module.exports = async (client) => {
             const guild = client.guilds.get(userinfo[i + 2]);
             if (!guild || !guild.me.permissions.has('MANAGE_ROLES')) continue;
             let member;
-            member = await guild.fetchMember(userinfo[i]).catch(member = undefined);
+            member = await guild.fetchMember(userinfo[i]).catch(() => member = undefined);
             if (!member) continue;
             const muteRole = guild.roles.find(r => r.name === 'muted by Automaton');
             if (!muteRole) continue;
             if (parseInt(userinfo[i + 1]) > Date.now()) {
                 if (!member.roles.has(muteRole.id)) await member.addRole(muteRole);
-            }
-            else {
+            } else {
                 if (member.roles.has(muteRole.id)) await member.removeRole(muteRole);
                 userinfo.splice(i, 3);
                 times -= 1;
@@ -64,10 +63,10 @@ module.exports = async (client) => {
     let counter = 0;
     const status = [`${client.guilds.size} Guilds`, 'Tag me for Info', `${client.guilds.map(g => g.memberCount).reduce((a, b) => a + b)} Users`, `${client.channels.size} Channels`];
     setInterval(changing_status, 12001);
+
     function changing_status() {
         counter++;
         if (counter == status.length) counter = 0;
         client.user.setActivity(status[counter]);
     }
 };
-
