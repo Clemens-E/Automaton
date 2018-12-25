@@ -49,6 +49,7 @@ module.exports = async (client) => {
             if (!member) continue;
             const muteRole = guild.roles.find(r => r.name === 'muted by Automaton');
             if (!muteRole) continue;
+            if (muteRole.comparePositionTo(guild.me.highestRole) >= 0) continue;
             if (parseInt(userinfo[i + 1]) > Date.now()) {
                 if (!member.roles.has(muteRole.id)) await member.addRole(muteRole);
             } else {
