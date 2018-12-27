@@ -3,7 +3,7 @@ const $console = require('Console');
 module.exports = async (client, guild) => {
     const mcount = guild.members.filter(m => !m.user.bot).size;
     const bcount = guild.members.filter(m => m.user.bot).size;
-    if (bcount > 10 && mcount < bcount) {
+    if (bcount > 25 && mcount < bcount) {
         guild.owner.send(`Hey, your guild has ${bcount} Bots and only ${mcount} Member. I dont like that, I will leave`).catch((O_o) => O_o);
         guild.leave();
         client.channels.get('461211772804792320').send(new Discord.RichEmbed().setDescription(`Left Guild ${guild.name} with ${mcount} members and ${bcount} bots.\nReason: more bots than users`).setColor(8135099));
