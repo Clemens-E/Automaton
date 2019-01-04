@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 module.exports.run = async (client, message) => {
     const words = client.settings.get(message.guild.id, 'highlight_it');
-    const content = message.content.toLowerCase();
+    const content = message.content;
     const filtered = words.filter((c) => content.includes(c));
     if (filtered.length === 0) return;
     const logchannel = client.getLogChannel(message.guild.id);
