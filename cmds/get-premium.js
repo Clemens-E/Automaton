@@ -8,7 +8,7 @@ module.exports.run = async (client, message) => {
         return;
     }
     if (!client.premium.has(message.author.id)) return message.reply('You are not listed in the Premium Database. Contact CHY4E#0505 if you think you should be');
-    if (!message.member.permissions.has('ADMINISTRATOR')) return message.reply('You need to be Administrator on thisguild.\n(so you can\' give every guild premium');
+    if (!message.member.permissions.has('ADMINISTRATOR')) return message.reply('You need to be Administrator on this guild.\n(so you can\'t give every guild premium');
     client.settings.setProp(message.guild.id, 'premium', true);
     message.channel.send(`The guild \`${message.guild.name}\` is now Premium`);
 };
