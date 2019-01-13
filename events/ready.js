@@ -3,6 +3,7 @@ const heapdump = require('heapdump');
 const Discord = require('discord.js');
 module.exports = async (client) => {
     client.ready = true;
+    client.dm.startService();
     if (client.settings.has('lastMessage')) {
         const dat = client.settings.get('lastMessage');
         const msg = await client.channels.get(dat.channel).fetchMessage(dat.msg);
