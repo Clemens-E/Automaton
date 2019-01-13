@@ -18,10 +18,7 @@ exports.run = async (client, message, args) => {
                         'Content-Type': 'text/plain',
                     },
                 }).then(res => res.json())
-                .then(r =>
-                    message.channel.send(new Discord.RichEmbed()
-                        .setColor(3138560)
-                        .addField('Uploaded Text', `:white_check_mark: [txtupload.cf](https://txtupload.cf/${r.hash}#${r.key})`)));
+                .then(r => message.channel.send(`https://txtupload.cf/${r.hash}#${r.key}`));
         }
     });
 };

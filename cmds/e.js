@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-const Discord = require('discord.js');
 const fetch = require('node-fetch');
 const child = require('child_process');
 module.exports.run = async (client, message, args) => {
@@ -21,11 +20,9 @@ module.exports.run = async (client, message, args) => {
                     headers: {
                         'Content-Type': 'text/plain',
                     },
-                }).then(res => res.json())
-                .then(r =>
-                    channel.send(new Discord.RichEmbed()
-                        .setColor(3138560)
-                        .addField('Uploaded Text', `:white_check_mark: [txtupload.cf](https://txtupload.cf/${r.hash}#${r.key})`)));
+                })
+                .then(res => res.json())
+                .then(r => channel.send(`https://txtupload.cf/${r.hash}#${r.key}`));
         }
     } catch (err) {
         message.channel.send(`\`ERROR\` \`\`\`xl\n${await clean(client, err)}\n\`\`\``);
@@ -36,15 +33,15 @@ async function clean(client, text) {
         text = await text;
     }
     if (typeof evaled !== 'string') {
-        text = require("util").inspect(text, {
-            depth: 0
+        text = require('util').inspect(text, {
+            depth: 0,
         });
     }
 
     text = text
         .replace(/`/g, '`' + String.fromCharCode(8203))
         .replace(/@/g, '@' + String.fromCharCode(8203))
-        .replace(client.token, 'this is libary');
+        .replace(client.token, 'my token');
 
     return text;
 }
