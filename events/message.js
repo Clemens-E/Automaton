@@ -76,9 +76,9 @@ module.exports = async (client, message) => {
         const myMissingPerms = message.guild.me.permissions.missing(cmd.help.myPermissions);
         const myChannelMissingPerms = message.channel.permissionsFor(message.guild.me).missing(cmd.help.myChannelPermissions);
 
-        if (myChannelMissingPerms.includes('SEND_MESSAGES')) return message.member.send(`I am are missing the following permissions:\`\`\`${myChannelMissingPerms.join('\n')}\`\`\``);
-        if (myMissingPerms.length > 0) return message.channel.send(`I am missing the following permissions:\`\`\`${myMissingPerms.join('\n')}\`\`\``);
-        if (myChannelMissingPerms.length > 0) return message.channel.send(`I am missing the following permissions:\`\`\`${myChannelMissingPerms.join('\n')}\`\`\``);
+        if (myChannelMissingPerms.includes('SEND_MESSAGES')) return message.member.send(`I'm missing the following permissions:\`\`\`${myChannelMissingPerms.join('\n')}\`\`\``);
+        if (myMissingPerms.length > 0) return message.channel.send(`I'm missing the following permissions:\`\`\`${myMissingPerms.join('\n')}\`\`\``);
+        if (myChannelMissingPerms.length > 0) return message.channel.send(`I'm missing the following permissions:\`\`\`${myChannelMissingPerms.join('\n')}\`\`\``);
         if (uMissingPerms.length > 0) return message.channel.send(`You are missing the following permissions:\`\`\`${uMissingPerms.join('\n')}\`\`\``);
         if (uChannelMissingPerms.length > 0) return message.channel.send(`You are missing the following permissions:\`\`\`${uChannelMissingPerms.join('\n')}\`\`\``);
         cmd.run(client, message, args);
