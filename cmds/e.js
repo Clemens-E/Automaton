@@ -34,7 +34,7 @@ async function clean(client, text) {
     }
     if (typeof evaled !== 'string') {
         text = require('util').inspect(text, {
-            depth: 0,
+            depth: 4,
         });
     }
 
