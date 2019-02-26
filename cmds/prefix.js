@@ -3,7 +3,7 @@ module.exports.run = async (client, message, args) => {
     let prefix = client.settings.getProp(message.guild.id, 'prefix');
     if (!args[0]) return message.reply('That prefix is empty!\nexample of command:\n`' + prefix + 'prefix $` //New prefix is \'$\'');
     prefix = args.join(' ');
-    if (prefix.length > 10) return message.channel.send('That prefix is too big. Please use a prexif under 10 symbols');
+    if (prefix.length > 10) return message.channel.send('That prefix is too big. Please use a prefix under 10 symbols');
     client.settings.setProp(message.guild.id, 'prefix', prefix);
     message.channel.send(`New Prefix is: \`${client.settings.getProp(message.guild.id, 'prefix')}\``);
 
