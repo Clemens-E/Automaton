@@ -42,7 +42,7 @@ module.exports = function (client) {
 
         // Remove old message logs to prevent warning people saying "Hi" 5 times a day.
         for (let index = messagelog.length; index > 0; index--) {
-            if (now <= messagelog.time + 300000) break;
+            if (now <= messagelog[index].time + 300000) break;
             messagelog.splice(index);
         }
         // Check how many times the same message has been sent.
