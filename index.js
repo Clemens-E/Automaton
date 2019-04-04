@@ -56,6 +56,6 @@ http.createServer((req, res) => {
     res.writeHead(200, {
         'Content-Type': 'text/html',
     });
-    res.write('Beep Beep Boop I work');
+    res.write(`Beep Beep Boop! ${client.user.tag} works.`);
     res.end();
 }).listen(3000);
