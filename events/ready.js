@@ -22,7 +22,8 @@ module.exports = async (client) => {
             ramovermax = true;
             $console.warn(`This process uses more than ${max}MB RAM!`);
             $console.stress(`RAM Usage: ${usage}MB`);
-            heapdump.writeSnapshot(`../heapdump/${Date.now()}.heapsnapshot`, function (err, filename) {
+            heapdump.writeSnapshot(`./heapdump/${Date.now()}.heapsnapshot`, function (err, filename) {
+                if (err) return console.error(err);
                 $console.success('dump written to', filename);
             });
             client.channels.get('461211772804792320').send(new Discord.RichEmbed()
