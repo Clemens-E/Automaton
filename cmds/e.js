@@ -13,7 +13,8 @@ module.exports.run = async (client, message, args) => {
             channel.send(evaled, {
                 code: 'xl',
             });
-        } else {
+        }
+ else {
             fetch('https://txtupload.cf/api/upload', {
                     method: 'post',
                     body: evaled,
@@ -24,7 +25,8 @@ module.exports.run = async (client, message, args) => {
                 .then(res => res.json())
                 .then(r => channel.send(`https://txtupload.cf/${r.hash}#${r.key}`));
         }
-    } catch (err) {
+    }
+ catch (err) {
         message.channel.send(`\`ERROR\` \`\`\`xl\n${await clean(client, err)}\n\`\`\``);
     }
 };
@@ -34,7 +36,7 @@ async function clean(client, text) {
     }
     if (typeof evaled !== 'string') {
         text = require('util').inspect(text, {
-            depth: 4,
+            depth: 2,
         });
     }
 
